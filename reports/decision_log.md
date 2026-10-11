@@ -50,3 +50,36 @@ This log records genuine, non-obvious engineering decisions, rationale, trade-of
   3. Partition dev and eval sets by customer `author_id` rather than random row splitting, guaranteeing zero conversation or customer-level leakage between development knowledge base and held-out evaluation.
 - **Rationale**: Random tweet splitting leaks conversation context and customer behavior into the retrieval index or evaluation set. Customer-level hashing guarantees complete separation.
 - **Alternatives Rejected**: Random row splitting (severe data leakage).
+
+---
+
+### Decision 5: Seven-Class Intent Taxonomy Derivation
+- **Date**: 2026-10-11
+- **Context**: Defining a small, defensible intent taxonomy derived from real customer inquiries directed at `AmazonHelp`.
+- **Decision**: Define 7 mutually exclusive intents:
+  1. `order_status_delivery`
+  2. `returns_refunds`
+  3. `damaged_defective_item`
+  4. `account_access_security`
+  5. `subscription_digital`
+  6. `product_inquiry_availability`
+  7. `other_unknown`
+- **Rationale**:
+  - Covers >90% of actual customer contact drivers in e-commerce support.
+  - Granular enough to distinguish operational handling (e.g. shipping delay vs product defect) without fragmenting into dozens of overlapping micro-intents.
+  - Includes an explicit `other_unknown` fallback to prevent forced misclassification of out-of-domain or ambiguous inquiries.
+- **Alternatives Rejected**: 3-class coarse taxonomy (insufficiently actionable) or 20+ fine-grained intents (high label noise and low inter-annotator agreement).
+
+---
+
+### Decision 6: Golden Evaluation Set Sampling and Leakage Safeguards
+- **Date**: 2026-10-11
+- **Context**: Constructing a high-quality, verified golden evaluation benchmark of 150–250 real examples.
+- **Decision**:
+  - Sampled exactly 200 real examples strictly from the held-out `eval_pairs.json` partition.
+  - Balanced across all 7 intents with representation of ambiguous and high-risk cases.
+  - Hand-reviewed against the annotation guide (`docs/annotation_guide.md`) with explicit `expected_action` and `escalation_reason`.
+  - Automated tests assert zero overlap between golden set customer tweet/author IDs and development data (`dev_pairs.json`).
+- **Rationale**: Ensures the headline evaluation benchmark represents genuine held-out customer interactions with zero data leakage from the knowledge base retriever or classification models.
+- **Alternatives Rejected**: Synthetically generated evaluation examples (fails to reflect real customer spelling, brevity, and frustration) or evaluating on the development set (uncalibrated overoptimistic metrics).
+

@@ -69,13 +69,28 @@ pytest -v
 - [x] **Checkpoint 0**: Workspace and Git preflight
 - [x] **Checkpoint 1**: Project skeleton, configuration, logging, and smoke tests
 - [x] **Checkpoint 2**: Dataset ingestion, preprocessing, and brand selection (`AmazonHelp`)
-- [ ] **Checkpoint 3**: Intent taxonomy and golden evaluation set
+- [x] **Checkpoint 3**: Intent taxonomy and golden evaluation set (200 examples)
 - [ ] **Checkpoint 4**: Baselines (Majority-Class & TF-IDF + Logistic Regression)
 - [ ] **Checkpoint 5**: Historical retrieval with FAISS and relevance thresholding
 - [ ] **Checkpoint 6**: AI agent pipeline with structured outputs and deterministic escalation
 - [ ] **Checkpoint 7**: Evaluation harness and LLM judge agreement
 - [ ] **Checkpoint 8**: Failure analysis, headline number critique, and decision log
 - [ ] **Checkpoint 9**: Final reproducibility verification and release
+
+## Intent Taxonomy & Golden Evaluation Benchmark
+
+Derived from customer interaction patterns on `AmazonHelp`:
+1. `order_status_delivery`: Shipping status, late packages, courier inquiries.
+2. `returns_refunds`: Return policies, refund timelines, locker drop-offs.
+3. `damaged_defective_item`: Broken, missing, expired, or incorrect products.
+4. `account_access_security`: Login issues, unauthorized charges, OTP authentication.
+5. `subscription_digital`: Prime memberships, video streaming, digital billing.
+6. `product_inquiry_availability`: Item specifications, stock availability, compatibility.
+7. `other_unknown`: Unclear, ambiguous, or out-of-domain inquiries.
+
+- **Annotation Guide**: Documented in [`docs/annotation_guide.md`](docs/annotation_guide.md).
+- **Golden Set Benchmark**: 200 hand-verified examples stored in `data/processed/golden_eval_set.json` strictly held out from training/dev data.
+
 
 ## Data Preparation & Preprocessing
 
