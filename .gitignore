@@ -8,6 +8,7 @@ __pycache__/
 *.py[cod]
 *$py.class
 *.so
+*.egg-info/
 .pytest_cache/
 .coverage
 htmlcov/
@@ -20,6 +21,7 @@ ENV/
 
 # Large datasets & raw data (DO NOT COMMIT RAW 3M TWEETS DATASET)
 data/raw/
+data/processed/*.json
 *.csv.zip
 *.tar.gz
 *.parquet

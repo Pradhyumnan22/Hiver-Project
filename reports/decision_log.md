@@ -25,3 +25,28 @@ This log records genuine, non-obvious engineering decisions, rationale, trade-of
   2. Ensures unit tests run completely credential-free without crashing when no API key is set.
   3. Standardized cross-platform path handling via `pathlib.Path` ensuring Windows path compatibility.
 - **Alternatives Rejected**: Pure environment variables (cluttered and unversioned hyperparameters) or hardcoded Python dictionaries (inflexible and prone to accidental commit of secrets).
+
+---
+
+### Decision 3: Brand Selection — AmazonHelp
+- **Date**: 2026-10-11
+- **Context**: Selecting a single brand from the 3M-tweet Kaggle dataset with sufficient volume, rich conversation linkages, and diverse support intents.
+- **Decision**: Select `AmazonHelp`.
+- **Rationale**:
+  1. `AmazonHelp` is the #1 brand by volume (>160,000 tweets across the full dataset; >3,000 in the first 50k rows), ensuring no sparsity in retrieval or training.
+  2. Diverse operational intents: delivery tracking, returns/refunds, damaged items, Prime digital subscriptions, and account security.
+  3. Explicit customer-response linkage via `in_response_to_tweet_id`, permitting high-fidelity conversation reconstruction.
+  4. Real-world escalation bifurcation: clear boundaries between public resolution (informational policy guidance) and private escalation (order/account lookup via DM).
+- **Alternatives Rejected**: `AppleSupport` (predominantly software troubleshooting, less transactional diversity) and `sprintcare` (telecom domain with less standardized e-commerce delivery/return taxonomy).
+
+---
+
+### Decision 4: Conversation Linking, Privacy Masking, and Zero-Leakage Split
+- **Date**: 2026-10-11
+- **Context**: Linking customer tweets to brand responses, removing PII, and splitting into development and evaluation partitions.
+- **Decision**:
+  1. Link parent customer tweets using `in_response_to_tweet_id`.
+  2. Mask all `@handles` to `@user`, URLs to `<URL>`, emails to `<EMAIL>`, and phone numbers to `<PHONE>`.
+  3. Partition dev and eval sets by customer `author_id` rather than random row splitting, guaranteeing zero conversation or customer-level leakage between development knowledge base and held-out evaluation.
+- **Rationale**: Random tweet splitting leaks conversation context and customer behavior into the retrieval index or evaluation set. Customer-level hashing guarantees complete separation.
+- **Alternatives Rejected**: Random row splitting (severe data leakage).

@@ -68,7 +68,7 @@ pytest -v
 
 - [x] **Checkpoint 0**: Workspace and Git preflight
 - [x] **Checkpoint 1**: Project skeleton, configuration, logging, and smoke tests
-- [ ] **Checkpoint 2**: Dataset ingestion, preprocessing, and brand selection
+- [x] **Checkpoint 2**: Dataset ingestion, preprocessing, and brand selection (`AmazonHelp`)
 - [ ] **Checkpoint 3**: Intent taxonomy and golden evaluation set
 - [ ] **Checkpoint 4**: Baselines (Majority-Class & TF-IDF + Logistic Regression)
 - [ ] **Checkpoint 5**: Historical retrieval with FAISS and relevance thresholding
@@ -76,3 +76,18 @@ pytest -v
 - [ ] **Checkpoint 7**: Evaluation harness and LLM judge agreement
 - [ ] **Checkpoint 8**: Failure analysis, headline number critique, and decision log
 - [ ] **Checkpoint 9**: Final reproducibility verification and release
+
+## Data Preparation & Preprocessing
+
+The preprocessing pipeline targets **AmazonHelp** from the 3M-tweet dataset:
+- **Conversation Linkage**: Matches brand response back to parent customer tweet using `in_response_to_tweet_id`.
+- **Privacy & Anonymization**: Masks user handles (`@user`), URLs (`<URL>`), emails (`<EMAIL>`), and phone numbers (`<PHONE>`).
+- **Leakage Prevention**: Strictly splits partitions by customer `author_id` (80% dev, 20% eval) ensuring zero customer or conversation overlap between the knowledge base and evaluation set.
+
+To reproduce dataset preparation:
+```powershell
+python scripts/prepare_dataset.py --max-rows 150000 --sample-size 100
+```
+- Sample fixture: `data/sample/sample_pairs.json` (committed to repository)
+- Processed splits: `data/processed/dev_pairs.json` (5,124 pairs) and `data/processed/eval_pairs.json` (1,292 pairs)
+
