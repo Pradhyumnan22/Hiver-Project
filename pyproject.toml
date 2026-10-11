@@ -1,0 +1,24 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "hiver-support-agent"
+version = "0.1.0"
+description = "Grounded AI customer support agent with deterministic escalation and rigorous ML evaluation"
+readme = "README.md"
+requires-python = ">=3.11"
+authors = [{ name = "Pradhyu" }]
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["src*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = ["test_*.py"]
+pythonpath = ["."]
+filterwarnings = [
+    "ignore::DeprecationWarning",
+    "ignore::UserWarning",
+]

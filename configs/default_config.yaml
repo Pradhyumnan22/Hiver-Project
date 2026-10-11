@@ -1,0 +1,32 @@
+# Hiver Support Agent Default Configuration
+project:
+  name: "hiver-support-agent"
+  seed: 42
+  environment: "development"
+
+data:
+  selected_brand: "AmazonHelp"  # Target brand selected from dataset
+  raw_dataset_path: "data/raw/twcs.csv"
+  processed_dir: "data/processed"
+  sample_dir: "data/sample"
+  golden_set_path: "data/processed/golden_eval_set.json"
+  dev_split_ratio: 0.8
+  eval_split_ratio: 0.2
+
+retrieval:
+  embedding_model: "sentence-transformers/all-MiniLM-L6-v2"
+  faiss_index_path: "data/processed/knowledge_base.index"
+  metadata_path: "data/processed/knowledge_metadata.json"
+  top_k: 3
+  relevance_threshold: 0.45  # Cosine similarity cutoff for evidence grounding
+
+agent:
+  llm_model: "gpt-4o-mini"
+  temperature: 0.0
+  max_tokens: 300
+  escalation_confidence_threshold: 0.70
+
+evaluation:
+  results_path: "reports/results.json"
+  judge_model: "gpt-4o-mini"
+  max_eval_latency_seconds: 15.0

@@ -1,0 +1,41 @@
+# Environment variables & secrets
+.env
+*.env
+!.env.example
+
+# Python bytecode & cache
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Virtual environments
+venv/
+.venv/
+env/
+ENV/
+
+# Large datasets & raw data (DO NOT COMMIT RAW 3M TWEETS DATASET)
+data/raw/
+*.csv.zip
+*.tar.gz
+*.parquet
+# Allow sample and fixtures
+!data/sample/
+!data/processed/.gitkeep
+
+# Model weights, embeddings, FAISS indices
+*.faiss
+*.index
+*.pt
+*.bin
+*.onnx
+
+# IDE & OS files
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db

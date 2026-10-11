@@ -1,0 +1,25 @@
+# Core Data & ML
+pandas>=2.0.0
+numpy>=1.24.0
+scikit-learn>=1.3.0
+
+# Vector Retrieval & Embeddings
+sentence-transformers>=2.2.0
+faiss-cpu>=1.7.4
+
+# Validation & Config
+pydantic>=2.5.0
+pydantic-settings>=2.0.0
+pyyaml>=6.0.0
+python-dotenv>=1.0.0
+
+# LLM Client (OpenAI standard client for flexible endpoints)
+openai>=1.12.0
+
+# API (Optional serving)
+fastapi>=0.109.0
+uvicorn>=0.27.0
+
+# Testing & Quality
+pytest>=8.0.0
+pytest-mock>=3.12.0
