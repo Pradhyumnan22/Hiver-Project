@@ -103,3 +103,27 @@ This log records genuine, non-obvious engineering decisions, rationale, trade-of
 - **Rationale**: Revealed that queries with low similarity (<0.35) retrieve ungrounded, contextually misleading replies (e.g., retrieving a billing response for an in-game content delivery complaint). This provides direct empirical justification for the dense semantic retriever and minimum relevance thresholding in Checkpoint 5.
 - **Alternatives Rejected**: Unconditioned template generation.
 
+---
+
+### Decision 9: FAISS Vector Indexing and Metric Inner-Product Cosine Similarity
+- **Date**: 2026-10-12
+- **Context**: Selecting vector search backend for retrieving top-k historical support interactions.
+- **Decision**: Implemented `FAISSRetriever` with `IndexFlatIP` on L2-normalized embeddings, guaranteeing exact cosine similarity computation with sub-millisecond query latency.
+- **Rationale**:
+  - `faiss-cpu` provides deterministic, production-grade vector search with zero external service dependencies.
+  - Inner Product of normalized vectors is mathematically identical to cosine similarity, making relevance scores directly interpretable between 0.0 and 1.0.
+  - Encapsulated within `DenseEmbedder` with offline resilience for testing environments.
+- **Alternatives Rejected**: Heavy managed vector databases (Pinecone, Qdrant, Milvus) which introduce unnecessary infrastructure complexity and external latency for an embedded support agent.
+
+---
+
+### Decision 10: Leakage Exclusion Filter and Relevance Thresholding
+- **Date**: 2026-10-12
+- **Context**: Ensuring held-out evaluation pairs are never indexed or retrieved, and preventing hallucinated grounding on low-similarity queries.
+- **Decision**:
+  1. **Strict Exclusion Filter**: The indexing pipeline accepts explicit sets of `exclude_author_ids` and `exclude_tweet_ids`. Any interaction matching the held-out eval set or golden benchmark is filtered out before vector insertion.
+  2. **Relevance Thresholding**: Top-k retrieval enforces a minimum similarity score (default 0.45). If no candidate meets this threshold, the retriever flags `is_empty = True`, prompting the agent to rely on general policy knowledge or escalate rather than hallucinate using irrelevant historical context.
+- **Rationale**: Solves the critical RAG failure mode where irrelevant historical cases poison generation prompts.
+- **Alternatives Rejected**: Unchecked top-k retrieval (always forcing k results regardless of relevance).
+
+

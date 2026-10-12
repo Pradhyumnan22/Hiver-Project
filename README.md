@@ -71,7 +71,7 @@ pytest -v
 - [x] **Checkpoint 2**: Dataset ingestion, preprocessing, and brand selection (`AmazonHelp`)
 - [x] **Checkpoint 3**: Intent taxonomy and golden evaluation set (200 examples)
 - [x] **Checkpoint 4**: Baselines (Majority-Class & TF-IDF + Logistic Regression)
-- [ ] **Checkpoint 5**: Historical retrieval with FAISS and relevance thresholding
+- [x] **Checkpoint 5**: Historical retrieval with FAISS and relevance thresholding
 - [ ] **Checkpoint 6**: AI agent pipeline with structured outputs and deterministic escalation
 - [ ] **Checkpoint 7**: Evaluation harness and LLM judge agreement
 - [ ] **Checkpoint 8**: Failure analysis, headline number critique, and decision log

@@ -22,6 +22,7 @@ ENV/
 # Large datasets & raw data (DO NOT COMMIT RAW 3M TWEETS DATASET)
 data/raw/
 data/processed/*.json
+data/processed/*.index
 !data/processed/golden_eval_set.json
 *.csv.zip
 *.tar.gz
