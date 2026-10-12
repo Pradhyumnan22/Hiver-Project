@@ -83,3 +83,23 @@ This log records genuine, non-obvious engineering decisions, rationale, trade-of
 - **Rationale**: Ensures the headline evaluation benchmark represents genuine held-out customer interactions with zero data leakage from the knowledge base retriever or classification models.
 - **Alternatives Rejected**: Synthetically generated evaluation examples (fails to reflect real customer spelling, brevity, and frustration) or evaluating on the development set (uncalibrated overoptimistic metrics).
 
+---
+
+### Decision 7: Baseline Model Selection (Majority Class & TF-IDF + Logistic Regression)
+- **Date**: 2026-10-12
+- **Context**: Establishing credible, reproducible baselines against which the proposed AI pipeline will be judged.
+- **Decision**:
+  1. **Majority Class Baseline**: Serves as the minimal empirical anchor (Accuracy: 10.81%, Macro F1: 0.0279 on the 7-class golden set).
+  2. **TF-IDF + Multinomial Logistic Regression**: Strong traditional linear text baseline with sublinear TF scaling and balanced class weighting (Accuracy: 77.84%, Macro F1: 0.7497).
+- **Rationale**: Demonstrates how much improvement modern LLM semantic representations and retrieval grounding actually provide over a fast (4.2ms) classical ML model, providing an honest comparison for interview defense.
+- **Alternatives Rejected**: Evaluating solely against zero-shot LLM without standard machine learning baselines (violates good scientific practice and conceals actual incremental value).
+
+---
+
+### Decision 8: Simple Retrieval Reply Baseline and Similarity Thresholding Need
+- **Date**: 2026-10-12
+- **Context**: Evaluating naive historical reply reuse prior to building the semantic FAISS index.
+- **Decision**: Implemented `SimpleRetrievalReplyBaseline` using TF-IDF sparse vector cosine similarity over 5,124 historical pairs.
+- **Rationale**: Revealed that queries with low similarity (<0.35) retrieve ungrounded, contextually misleading replies (e.g., retrieving a billing response for an in-game content delivery complaint). This provides direct empirical justification for the dense semantic retriever and minimum relevance thresholding in Checkpoint 5.
+- **Alternatives Rejected**: Unconditioned template generation.
+

@@ -70,12 +70,33 @@ pytest -v
 - [x] **Checkpoint 1**: Project skeleton, configuration, logging, and smoke tests
 - [x] **Checkpoint 2**: Dataset ingestion, preprocessing, and brand selection (`AmazonHelp`)
 - [x] **Checkpoint 3**: Intent taxonomy and golden evaluation set (200 examples)
-- [ ] **Checkpoint 4**: Baselines (Majority-Class & TF-IDF + Logistic Regression)
+- [x] **Checkpoint 4**: Baselines (Majority-Class & TF-IDF + Logistic Regression)
 - [ ] **Checkpoint 5**: Historical retrieval with FAISS and relevance thresholding
 - [ ] **Checkpoint 6**: AI agent pipeline with structured outputs and deterministic escalation
 - [ ] **Checkpoint 7**: Evaluation harness and LLM judge agreement
 - [ ] **Checkpoint 8**: Failure analysis, headline number critique, and decision log
 - [ ] **Checkpoint 9**: Final reproducibility verification and release
+
+## Baseline Performance Results
+
+Evaluated on held-out **Golden Evaluation Set** (`data/processed/golden_eval_set.json`):
+
+| Model | Classification Accuracy | Macro F1 | Escalation Accuracy | Escalation F1 | Avg Latency |
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| **Majority-Class Baseline** | 10.81% | 0.0279 | 65.95% | 0.0000 | 0.002 ms |
+| **TF-IDF + Logistic Regression** | **77.84%** | **0.7497** | **82.16%** | **0.7519** | **4.20 ms** |
+| **AI Support Agent (Proposed)** | *(CP 6 & 7)* | *(CP 6 & 7)* | *(CP 6 & 7)* | *(CP 6 & 7)* | *(CP 6 & 7)* |
+
+- Per-class F1 for TF-IDF + LogReg:
+  - `subscription_digital`: **0.9796**
+  - `returns_refunds`: **0.9167**
+  - `order_status_delivery`: **0.8636**
+  - `account_access_security`: **0.7778**
+  - `damaged_defective_item`: **0.6667**
+  - `product_inquiry_availability`: **0.5217**
+  - `other_unknown`: **0.5217**
+- Detailed metrics saved to [`reports/results.json`](reports/results.json).
+
 
 ## Intent Taxonomy & Golden Evaluation Benchmark
 

@@ -1,0 +1,315 @@
+{
+  "benchmark_metadata": {
+    "dataset": "AmazonHelp (Customer Support on Twitter)",
+    "evaluation_set": "golden_eval_set.json",
+    "eval_size": 185,
+    "train_size": 5124,
+    "timestamp": "2026-10-12T09:33:19Z"
+  },
+  "baselines": {
+    "majority_class": {
+      "classification": {
+        "accuracy": 0.1081,
+        "macro_f1": 0.0279,
+        "macro_precision": 0.0154,
+        "macro_recall": 0.1429,
+        "labels": [
+          "order_status_delivery",
+          "returns_refunds",
+          "damaged_defective_item",
+          "account_access_security",
+          "subscription_digital",
+          "product_inquiry_availability",
+          "other_unknown"
+        ],
+        "per_class": {
+          "order_status_delivery": {
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1_score": 0.0,
+            "support": 45
+          },
+          "returns_refunds": {
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1_score": 0.0,
+            "support": 35
+          },
+          "damaged_defective_item": {
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1_score": 0.0,
+            "support": 22
+          },
+          "account_access_security": {
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1_score": 0.0,
+            "support": 21
+          },
+          "subscription_digital": {
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1_score": 0.0,
+            "support": 25
+          },
+          "product_inquiry_availability": {
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1_score": 0.0,
+            "support": 17
+          },
+          "other_unknown": {
+            "precision": 0.1081,
+            "recall": 1.0,
+            "f1_score": 0.1951,
+            "support": 20
+          }
+        },
+        "confusion_matrix": [
+          [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            45
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            35
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            22
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            21
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            25
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            17
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            20
+          ]
+        ]
+      },
+      "escalation": {
+        "accuracy": 0.6595,
+        "escalation_f1": 0.0,
+        "escalation_precision": 0.0,
+        "escalation_recall": 0.0,
+        "escalation_rate": 0.0,
+        "total_evaluated": 185
+      },
+      "avg_latency_ms_per_query": 0.002
+    },
+    "tfidf_logistic_regression": {
+      "classification": {
+        "accuracy": 0.7784,
+        "macro_f1": 0.7497,
+        "macro_precision": 0.868,
+        "macro_recall": 0.7381,
+        "labels": [
+          "order_status_delivery",
+          "returns_refunds",
+          "damaged_defective_item",
+          "account_access_security",
+          "subscription_digital",
+          "product_inquiry_availability",
+          "other_unknown"
+        ],
+        "per_class": {
+          "order_status_delivery": {
+            "precision": 0.8837,
+            "recall": 0.8444,
+            "f1_score": 0.8636,
+            "support": 45
+          },
+          "returns_refunds": {
+            "precision": 0.8919,
+            "recall": 0.9429,
+            "f1_score": 0.9167,
+            "support": 35
+          },
+          "damaged_defective_item": {
+            "precision": 1.0,
+            "recall": 0.5,
+            "f1_score": 0.6667,
+            "support": 22
+          },
+          "account_access_security": {
+            "precision": 0.9333,
+            "recall": 0.6667,
+            "f1_score": 0.7778,
+            "support": 21
+          },
+          "subscription_digital": {
+            "precision": 1.0,
+            "recall": 0.96,
+            "f1_score": 0.9796,
+            "support": 25
+          },
+          "product_inquiry_availability": {
+            "precision": 1.0,
+            "recall": 0.3529,
+            "f1_score": 0.5217,
+            "support": 17
+          },
+          "other_unknown": {
+            "precision": 0.3673,
+            "recall": 0.9,
+            "f1_score": 0.5217,
+            "support": 20
+          }
+        },
+        "confusion_matrix": [
+          [
+            38,
+            0,
+            0,
+            0,
+            0,
+            0,
+            7
+          ],
+          [
+            1,
+            33,
+            0,
+            0,
+            0,
+            0,
+            1
+          ],
+          [
+            4,
+            2,
+            11,
+            0,
+            0,
+            0,
+            5
+          ],
+          [
+            0,
+            1,
+            0,
+            14,
+            0,
+            0,
+            6
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            24,
+            0,
+            1
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0,
+            6,
+            11
+          ],
+          [
+            0,
+            1,
+            0,
+            1,
+            0,
+            0,
+            18
+          ]
+        ]
+      },
+      "escalation": {
+        "accuracy": 0.8216,
+        "escalation_f1": 0.7519,
+        "escalation_precision": 0.7143,
+        "escalation_recall": 0.7937,
+        "escalation_rate": 0.3784,
+        "total_evaluated": 185
+      },
+      "avg_latency_ms_per_query": 4.198
+    },
+    "simple_retrieval_reply": {
+      "samples": [
+        {
+          "id": "gold_634",
+          "query": "@user @user why is my order at my local courier for the last 6 days and still hasn\u2019t been delivered to me?? Over 1 week late \ud83d\ude21",
+          "retrieved_reply": "@user We are still working on this! Please be sure to check your e-mail for further updates. ^ZW",
+          "similarity_score": 0.313
+        },
+        {
+          "id": "gold_1695",
+          "query": "@user my order hasn\u2019t arrived (it was due 14th October). Can you help?",
+          "retrieved_reply": "@user If your parcel doesn't arrive by 21:00, Becca. Give us a shout here: <URL> We'd be happy to help. ^SK",
+          "similarity_score": 0.688
+        },
+        {
+          "id": "gold_1721",
+          "query": "@user Never got the beta and now I\u2019m being told I won\u2019t get ANY of the other stuff. Including Last Jedi content and or bonus classes. Anything! :(",
+          "retrieved_reply": "@user Sorry to hear that. Can I ask if you contacted us when your orders were delayed before so we could take a look into it for you? ^TI",
+          "similarity_score": 0.264
+        },
+        {
+          "id": "gold_2565",
+          "query": "@user Where is my order? <URL>",
+          "retrieved_reply": "@user I'm sorry your order is taking longer than expected! Have we missed the delivery date shown here: <URL> ^BN",
+          "similarity_score": 0.7302
+        },
+        {
+          "id": "gold_9125",
+          "query": "@user I'm UK based. Are the contact details the same?",
+          "retrieved_reply": "@user Thank you for checking. We'd like to take a closer look to help find where the charge came from. When you have a moment, please call or chat with us here: <URL> ^MB",
+          "similarity_score": 0.3479
+        }
+      ]
+    }
+  }
+}
