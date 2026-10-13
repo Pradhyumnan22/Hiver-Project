@@ -77,19 +77,45 @@ class SimpleRetrievalReplyBaseline:
         )
         self.historical_queries: List[str] = []
         self.historical_replies: List[str] = []
+        self.source_ids: List[str] = []
         self.query_vectors = None
 
-    def fit(self, customer_texts: List[str], brand_replies: List[str]) -> "SimpleRetrievalReplyBaseline":
+    def fit(
+        self,
+        customer_texts: List[str],
+        brand_replies: List[str],
+        source_ids: Optional[List[str]] = None,
+    ) -> "SimpleRetrievalReplyBaseline":
+        if len(customer_texts) != len(brand_replies):
+            raise ValueError("customer_texts and brand_replies must have equal length.")
+        if not customer_texts:
+            raise ValueError("At least one historical pair is required.")
+        if source_ids is not None and len(source_ids) != len(customer_texts):
+            raise ValueError("source_ids and customer_texts must have equal length.")
         self.historical_queries = customer_texts
         self.historical_replies = brand_replies
+        self.source_ids = source_ids or [
+            f"historical_{index}" for index in range(len(customer_texts))
+        ]
         self.query_vectors = self.vectorizer.fit_transform(customer_texts)
         logger.info(f"SimpleRetrievalReplyBaseline indexed {len(customer_texts)} historical pairs.")
         return self
 
     def reply(self, query: str) -> Tuple[str, float]:
         """Retrieve most similar historical reply and cosine similarity score."""
+        reply, score, _ = self.reply_with_source(query)
+        return reply, score
+
+    def reply_with_source(self, query: str) -> Tuple[str, float, str]:
+        """Retrieve the nearest reply, similarity score, and source pair ID."""
+        if self.query_vectors is None:
+            raise ValueError("Model has not been fitted yet.")
         q_vec = self.vectorizer.transform([query])
         sims = cosine_similarity(q_vec, self.query_vectors)[0]
         best_idx = int(np.argmax(sims))
         best_score = float(sims[best_idx])
-        return self.historical_replies[best_idx], round(best_score, 4)
+        return (
+            self.historical_replies[best_idx],
+            round(best_score, 4),
+            self.source_ids[best_idx],
+        )

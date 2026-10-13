@@ -82,8 +82,23 @@ def test_simple_retrieval_reply_baseline():
         "You can initiate a return label at our Returns Center.",
     ]
 
-    retriever = SimpleRetrievalReplyBaseline().fit(queries, replies)
+    retriever = SimpleRetrievalReplyBaseline().fit(
+        queries,
+        replies,
+        source_ids=["delivery_case", "return_case"],
+    )
     reply, score = retriever.reply("order is late tracking")
+    traced_reply, traced_score, source_id = retriever.reply_with_source(
+        "order is late tracking"
+    )
 
     assert "Your Orders" in reply
     assert score > 0.0
+    assert traced_reply == reply
+    assert traced_score == score
+    assert source_id == "delivery_case"
+
+
+def test_simple_retrieval_reply_rejects_misaligned_inputs():
+    with pytest.raises(ValueError, match="equal length"):
+        SimpleRetrievalReplyBaseline().fit(["one query"], [])

@@ -2,16 +2,19 @@
   "benchmark_metadata": {
     "dataset": "AmazonHelp (Customer Support on Twitter)",
     "evaluation_set": "golden_eval_set.json",
-    "eval_size": 185,
+    "eval_size": 200,
     "train_size": 5124,
-    "timestamp": "2026-10-12T09:33:19Z"
+    "training_label_source": "deterministic_weak_supervision_rules",
+    "evaluation_label_source": "ai_manually_reviewed",
+    "leakage_check": "zero author and tweet ID overlap",
+    "timestamp": "2026-10-13T14:46:58Z"
   },
   "baselines": {
     "majority_class": {
       "classification": {
-        "accuracy": 0.1081,
-        "macro_f1": 0.0279,
-        "macro_precision": 0.0154,
+        "accuracy": 0.195,
+        "macro_f1": 0.0466,
+        "macro_precision": 0.0279,
         "macro_recall": 0.1429,
         "labels": [
           "order_status_delivery",
@@ -27,13 +30,13 @@
             "precision": 0.0,
             "recall": 0.0,
             "f1_score": 0.0,
-            "support": 45
+            "support": 58
           },
           "returns_refunds": {
             "precision": 0.0,
             "recall": 0.0,
             "f1_score": 0.0,
-            "support": 35
+            "support": 31
           },
           "damaged_defective_item": {
             "precision": 0.0,
@@ -51,7 +54,7 @@
             "precision": 0.0,
             "recall": 0.0,
             "f1_score": 0.0,
-            "support": 25
+            "support": 12
           },
           "product_inquiry_availability": {
             "precision": 0.0,
@@ -60,10 +63,10 @@
             "support": 17
           },
           "other_unknown": {
-            "precision": 0.1081,
+            "precision": 0.195,
             "recall": 1.0,
-            "f1_score": 0.1951,
-            "support": 20
+            "f1_score": 0.3264,
+            "support": 39
           }
         },
         "confusion_matrix": [
@@ -74,7 +77,7 @@
             0,
             0,
             0,
-            45
+            58
           ],
           [
             0,
@@ -83,7 +86,7 @@
             0,
             0,
             0,
-            35
+            31
           ],
           [
             0,
@@ -110,7 +113,7 @@
             0,
             0,
             0,
-            25
+            12
           ],
           [
             0,
@@ -128,26 +131,26 @@
             0,
             0,
             0,
-            20
+            39
           ]
         ]
       },
       "escalation": {
-        "accuracy": 0.6595,
+        "accuracy": 0.225,
         "escalation_f1": 0.0,
         "escalation_precision": 0.0,
         "escalation_recall": 0.0,
         "escalation_rate": 0.0,
-        "total_evaluated": 185
+        "total_evaluated": 200
       },
-      "avg_latency_ms_per_query": 0.002
+      "avg_latency_ms_per_query": 0.001
     },
     "tfidf_logistic_regression": {
       "classification": {
-        "accuracy": 0.7784,
-        "macro_f1": 0.7497,
-        "macro_precision": 0.868,
-        "macro_recall": 0.7381,
+        "accuracy": 0.56,
+        "macro_f1": 0.5178,
+        "macro_precision": 0.5752,
+        "macro_recall": 0.5388,
         "labels": [
           "order_status_delivery",
           "returns_refunds",
@@ -159,53 +162,71 @@
         ],
         "per_class": {
           "order_status_delivery": {
-            "precision": 0.8837,
-            "recall": 0.8444,
-            "f1_score": 0.8636,
-            "support": 45
+            "precision": 0.6809,
+            "recall": 0.5517,
+            "f1_score": 0.6095,
+            "support": 58
           },
           "returns_refunds": {
-            "precision": 0.8919,
-            "recall": 0.9429,
-            "f1_score": 0.9167,
-            "support": 35
+            "precision": 0.7714,
+            "recall": 0.871,
+            "f1_score": 0.8182,
+            "support": 31
           },
           "damaged_defective_item": {
-            "precision": 1.0,
-            "recall": 0.5,
-            "f1_score": 0.6667,
+            "precision": 0.5455,
+            "recall": 0.2727,
+            "f1_score": 0.3636,
             "support": 22
           },
           "account_access_security": {
-            "precision": 0.9333,
-            "recall": 0.6667,
-            "f1_score": 0.7778,
+            "precision": 0.9286,
+            "recall": 0.619,
+            "f1_score": 0.7429,
             "support": 21
           },
           "subscription_digital": {
-            "precision": 1.0,
-            "recall": 0.96,
-            "f1_score": 0.9796,
-            "support": 25
+            "precision": 0.3103,
+            "recall": 0.75,
+            "f1_score": 0.439,
+            "support": 12
           },
           "product_inquiry_availability": {
-            "precision": 1.0,
-            "recall": 0.3529,
-            "f1_score": 0.5217,
+            "precision": 0.4,
+            "recall": 0.1176,
+            "f1_score": 0.1818,
             "support": 17
           },
           "other_unknown": {
-            "precision": 0.3673,
-            "recall": 0.9,
-            "f1_score": 0.5217,
-            "support": 20
+            "precision": 0.3898,
+            "recall": 0.5897,
+            "f1_score": 0.4694,
+            "support": 39
           }
         },
         "confusion_matrix": [
           [
-            38,
+            32,
+            1,
+            2,
+            0,
+            11,
+            3,
+            9
+          ],
+          [
+            2,
+            27,
             0,
             0,
+            0,
+            0,
+            2
+          ],
+          [
+            3,
+            6,
+            6,
             0,
             0,
             0,
@@ -213,101 +234,115 @@
           ],
           [
             1,
-            33,
             0,
             0,
-            0,
-            0,
-            1
-          ],
-          [
-            4,
+            13,
             2,
-            11,
-            0,
-            0,
             0,
             5
           ],
           [
             0,
+            0,
+            0,
+            0,
+            9,
+            0,
+            3
+          ],
+          [
             1,
-            0,
-            14,
-            0,
-            0,
-            6
-          ],
-          [
-            0,
-            0,
-            0,
-            0,
-            24,
-            0,
-            1
-          ],
-          [
-            0,
-            0,
-            0,
-            0,
-            0,
-            6,
-            11
-          ],
-          [
-            0,
-            1,
-            0,
             1,
             0,
             0,
-            18
+            3,
+            2,
+            10
+          ],
+          [
+            8,
+            0,
+            3,
+            1,
+            4,
+            0,
+            23
           ]
         ]
       },
       "escalation": {
-        "accuracy": 0.8216,
-        "escalation_f1": 0.7519,
-        "escalation_precision": 0.7143,
-        "escalation_recall": 0.7937,
-        "escalation_rate": 0.3784,
-        "total_evaluated": 185
+        "accuracy": 0.45,
+        "escalation_f1": 0.5259,
+        "escalation_precision": 0.7922,
+        "escalation_recall": 0.3935,
+        "escalation_rate": 0.385,
+        "total_evaluated": 200
       },
-      "avg_latency_ms_per_query": 4.198
+      "avg_latency_ms_per_query": 3.564
     },
     "simple_retrieval_reply": {
+      "evaluated_queries": 200,
+      "mean_top1_similarity": 0.3361,
+      "median_top1_similarity": 0.3118,
+      "relevance_threshold": 0.35,
+      "coverage_at_threshold": 0.31,
+      "avg_latency_ms_per_query": 2.403,
       "samples": [
         {
-          "id": "gold_634",
-          "query": "@user @user why is my order at my local courier for the last 6 days and still hasn\u2019t been delivered to me?? Over 1 week late \ud83d\ude21",
-          "retrieved_reply": "@user We are still working on this! Please be sure to check your e-mail for further updates. ^ZW",
-          "similarity_score": 0.313
+          "id": "gold_621",
+          "intent": "account_access_security",
+          "query": "@user I want my amazon payments account CLOSED. dm me please.",
+          "retrieved_reply": "@user Please reply to the email correspondence for a better insight. (2/2) ^SI",
+          "similarity_score": 0.2647,
+          "source_pair_id": "AmazonHelp_18961_18960"
         },
         {
-          "id": "gold_1695",
-          "query": "@user my order hasn\u2019t arrived (it was due 14th October). Can you help?",
-          "retrieved_reply": "@user If your parcel doesn't arrive by 21:00, Becca. Give us a shout here: <URL> We'd be happy to help. ^SK",
-          "similarity_score": 0.688
+          "id": "gold_52251",
+          "intent": "other_unknown",
+          "query": "@user Having some issues with your jobs portal using social login with LinkedIn.",
+          "retrieved_reply": "@user I'm sorry to hear this! We'd love to help. Can you provide more info on the issue you need to troubleshoot? ^JS",
+          "similarity_score": 0.363,
+          "source_pair_id": "AmazonHelp_105280_105281"
         },
         {
-          "id": "gold_1721",
-          "query": "@user Never got the beta and now I\u2019m being told I won\u2019t get ANY of the other stuff. Including Last Jedi content and or bonus classes. Anything! :(",
-          "retrieved_reply": "@user Sorry to hear that. Can I ask if you contacted us when your orders were delayed before so we could take a look into it for you? ^TI",
-          "similarity_score": 0.264
+          "id": "gold_75849",
+          "intent": "returns_refunds",
+          "query": "@user @user AmazonIN customer service is pathetic, I requested to refund to my amazon pay coz my bank account is closed! surprisingly Amazon like company do not have alternatives ways to refund a customer! Is Amazon most customer centric company? I doubt!",
+          "retrieved_reply": "@user Hi, how much were you charged for Amazon Prime? ^KI",
+          "similarity_score": 0.3208,
+          "source_pair_id": "AmazonHelp_69722_69724"
         },
         {
-          "id": "gold_2565",
-          "query": "@user Where is my order? <URL>",
-          "retrieved_reply": "@user I'm sorry your order is taking longer than expected! Have we missed the delivery date shown here: <URL> ^BN",
-          "similarity_score": 0.7302
+          "id": "gold_89307",
+          "intent": "subscription_digital",
+          "query": "@user hey what's going on with #Vikings season 5? There's no #closed captions / #subtitles ?? I thought you guys were good on the #DisabilityDiscriminationAct stuff?",
+          "retrieved_reply": "@user Sorry to see that, Sean. Can I ask if you contacted us via the link provided in the email?^TI",
+          "similarity_score": 0.3463,
+          "source_pair_id": "AmazonHelp_69938_69940"
         },
         {
-          "id": "gold_9125",
-          "query": "@user I'm UK based. Are the contact details the same?",
-          "retrieved_reply": "@user Thank you for checking. We'd like to take a closer look to help find where the charge came from. When you have a moment, please call or chat with us here: <URL> ^MB",
-          "similarity_score": 0.3479
+          "id": "gold_39576",
+          "intent": "damaged_defective_item",
+          "query": "@user I did. It keeps happening to me. I mostly buy books, and my books end up looking like old books or they come damaged.",
+          "retrieved_reply": "@user Yay! I'm glad we could help out. ^ST",
+          "similarity_score": 0.3669,
+          "source_pair_id": "AmazonHelp_121143_121141"
+        },
+        {
+          "id": "gold_49969",
+          "intent": "product_inquiry_availability",
+          "query": "@user Got call from Mi saying warranty expired and can't claim now. As the issue raised before expiry ask to deal with Amazon. Now resolution at u",
+          "retrieved_reply": "@user Hi Sandeep, sorry to hear that. Can I ask what you were advised when you spoke with us about this? ^TI",
+          "similarity_score": 0.2015,
+          "source_pair_id": "AmazonHelp_115899_115901"
+        },
+        {
+          "id": "gold_62201",
+          "intent": "order_status_delivery",
+          "query": "@user your Brant locker is broken AGAIN! I say again assuming you actually fix it. So tired of not being able to pick up my orders!",
+          "retrieved_reply": "@user Oh no! I'm very sorry for the troubles with this Locker pickup, Leigh! Have you been in touch with us for real-time help? ^FR",
+          "similarity_score": 0.2694,
+          "source_pair_id": "AmazonHelp_49128_49129"
         }
       ]
     }

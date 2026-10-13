@@ -100,8 +100,15 @@ This log records genuine, non-obvious engineering decisions, rationale, trade-of
 - **Date**: 2026-10-12
 - **Context**: Establishing credible, reproducible baselines against which the proposed AI pipeline will be judged.
 - **Decision**:
-  1. **Majority Class Baseline**: Serves as the minimal empirical anchor (Accuracy: 10.81%, Macro F1: 0.0279 on the 7-class golden set).
-  2. **TF-IDF + Multinomial Logistic Regression**: Strong traditional linear text baseline with sublinear TF scaling and balanced class weighting (Accuracy: 77.84%, Macro F1: 0.7497).
+  1. **Majority Class Baseline**: Serves as the minimal empirical anchor
+     (Accuracy: 19.50%, Macro F1: 0.0466 on the corrected 200-example set).
+  2. **TF-IDF + Multinomial Logistic Regression**: Traditional linear text
+     baseline with sublinear TF scaling and balanced class weighting
+     (Accuracy: 56.00%, Macro F1: 0.5178).
+  3. Development labels are deterministic weak supervision, while evaluation
+     labels received separate semantic review. Results therefore measure
+     transfer away from the labelling rules rather than supervised learning
+     from equivalent-quality human labels.
 - **Rationale**: Demonstrates how much improvement modern LLM semantic representations and retrieval grounding actually provide over a fast (4.2ms) classical ML model, providing an honest comparison for interview defense.
 - **Alternatives Rejected**: Evaluating solely against zero-shot LLM without standard machine learning baselines (violates good scientific practice and conceals actual incremental value).
 
@@ -111,7 +118,12 @@ This log records genuine, non-obvious engineering decisions, rationale, trade-of
 - **Date**: 2026-10-12
 - **Context**: Evaluating naive historical reply reuse prior to building the semantic FAISS index.
 - **Decision**: Implemented `SimpleRetrievalReplyBaseline` using TF-IDF sparse vector cosine similarity over 5,124 historical pairs.
-- **Rationale**: Revealed that queries with low similarity (<0.35) retrieve ungrounded, contextually misleading replies (e.g., retrieving a billing response for an in-game content delivery complaint). This provides direct empirical justification for the dense semantic retriever and minimum relevance thresholding in Checkpoint 5.
+- **Rationale**: On all 200 corrected evaluation queries, mean top-1 similarity
+  was 0.3361 and only 31.0% met the 0.35 relevance threshold. Traceable
+  examples show contextually misleading replies below and sometimes above
+  this cutoff. This provides empirical justification for thresholding and
+  separate response-quality evaluation rather than treating retrieval as
+  successful merely because a nearest neighbour exists.
 - **Alternatives Rejected**: Unconditioned template generation.
 
 ---
