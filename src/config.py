@@ -38,7 +38,6 @@ class AgentSettings(BaseModel):
     llm_model: str = Field(default_factory=lambda: os.getenv("LLM_MODEL", "gpt-4o-mini"))
     temperature: float = 0.0
     max_tokens: int = 300
-    escalation_confidence_threshold: float = 0.70
     api_key: Optional[str] = Field(default_factory=lambda: os.getenv("OPENAI_API_KEY"))
     base_url: Optional[str] = Field(default_factory=lambda: os.getenv("OPENAI_BASE_URL", "https://api.openai.com/v1"))
 

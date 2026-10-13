@@ -72,7 +72,7 @@ pytest -v
 - [x] **Checkpoint 3**: Intent taxonomy and golden evaluation set (200 unique, semantically reviewed examples)
 - [x] **Checkpoint 4**: Baselines (Majority-Class & TF-IDF + Logistic Regression)
 - [x] **Checkpoint 5**: Historical retrieval with FAISS and relevance thresholding
-- [ ] **Checkpoint 6**: AI agent pipeline with structured outputs and deterministic escalation
+- [x] **Checkpoint 6**: AI agent pipeline with structured outputs and deterministic escalation
 - [ ] **Checkpoint 7**: Evaluation harness and LLM judge agreement
 - [ ] **Checkpoint 8**: Failure analysis, headline number critique, and decision log
 - [ ] **Checkpoint 9**: Final reproducibility verification and release
@@ -119,8 +119,7 @@ Derived from customer interaction patterns on `AmazonHelp`:
 - **Golden Set Status**: 200 unique held-out examples were reviewed row by row
   in four semantic-review batches. Provenance is retained in
   `data/annotations/golden_review.csv`; records are explicitly marked
-  `ai_manually_reviewed`, not human-verified. Existing baseline metrics are
-  legacy drafts and must be rerun during the Checkpoint 4 repair.
+  `ai_manually_reviewed`, not human-verified.
 
 
 ## Data Preparation & Preprocessing
@@ -160,4 +159,24 @@ python scripts/build_knowledge_base.py
 The build excludes evaluation authors, tweet IDs, normalized evaluation text,
 and duplicate indexed text. Model download and index files are intentionally
 excluded from Git.
+
+## Grounded Agent and Escalation
+
+`src.agent.run_support_agent` is the single pipeline entry point. It:
+
+1. Validates an LLM intent classification against the seven-intent enum.
+2. Retrieves traceable historical cases above the calibrated threshold.
+3. Applies deterministic escalation rules before generation.
+4. Generates a structured draft only for eligible messages.
+5. Verifies cited evidence IDs and rejects unsupported action/status claims.
+
+The deterministic policy escalates high-risk language, unsupported intents,
+account-security cases, transaction-specific requests, repeated unresolved
+complaints, insufficient evidence, malformed model output, API failures, and
+unsafe drafts. It does not use an LLM-provided confidence score.
+
+Historical responses are examples of past handling—not verified resolutions
+or current policy. Replies are offline drafts and are never published to real
+customers. Unit and integration tests use deterministic fake LLM responses,
+so no API credential is required.
 

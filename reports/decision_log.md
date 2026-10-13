@@ -161,4 +161,38 @@ This log records genuine, non-obvious engineering decisions, rationale, trade-of
   a human relevance label.
 - **Alternatives Rejected**: Unchecked top-k retrieval (always forcing k results regardless of relevance).
 
+---
+
+### Decision 11: Structured LLM Boundary Without Confidence Probabilities
+- **Date**: 2026-10-13
+- **Context**: Constraining intent classification and reply generation while
+  handling malformed responses and provider failures.
+- **Decision**: Use direct OpenAI-compatible structured JSON output validated
+  by Pydantic. Intent output contains a taxonomy value, rationale, and optional
+  uncertainty—but no numerical confidence. Reply output contains a bounded
+  draft, evidence IDs, and optional uncertainty.
+- **Rationale**: Provider-generated confidence is not calibrated probability.
+  Schema validation provides a testable boundary, and any invalid output or
+  API error fails closed to human escalation.
+- **Alternatives Rejected**: Free-form parsing, trusting self-reported LLM
+  confidence, and adding an orchestration framework for two model calls.
+
+---
+
+### Decision 12: Deterministic Escalation Before and After Generation
+- **Date**: 2026-10-13
+- **Context**: Preventing the model from deciding whether its own output is
+  safe to send.
+- **Decision**: Apply explicit rules before generation for high-risk language,
+  unsupported intent, account verification, transaction verification,
+  repeated unresolved history, and insufficient retrieval evidence. After
+  generation, require cited IDs to be a subset of retrieved evidence and
+  reject phrases that claim completed actions, private account knowledge, or
+  guaranteed outcomes.
+- **Rationale**: Safety decisions remain deterministic, auditable, and
+  credential-free in tests. Escalated cases return a stable reason code plus a
+  plain-language explanation.
+- **Alternatives Rejected**: Asking the same LLM to approve its own draft or
+  auto-handling when retrieval is empty.
+
 
