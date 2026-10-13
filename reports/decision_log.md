@@ -76,11 +76,22 @@ This log records genuine, non-obvious engineering decisions, rationale, trade-of
 - **Date**: 2026-10-11
 - **Context**: Constructing a high-quality, verified golden evaluation benchmark of 150–250 real examples.
 - **Decision**:
-  - Sampled exactly 200 real examples strictly from the held-out `eval_pairs.json` partition.
-  - Balanced across all 7 intents with representation of ambiguous and high-risk cases.
-  - Hand-reviewed against the annotation guide (`docs/annotation_guide.md`) with explicit `expected_action` and `escalation_reason`.
-  - Automated tests assert zero overlap between golden set customer tweet/author IDs and development data (`dev_pairs.json`).
-- **Rationale**: Ensures the headline evaluation benchmark represents genuine held-out customer interactions with zero data leakage from the knowledge base retriever or classification models.
+  - Prepare exactly 200 real examples strictly from the held-out
+    `eval_pairs.json` partition using deterministic seed 42.
+  - De-duplicate by customer tweet ID before stratified sampling because one
+    customer tweet can have multiple historical brand replies.
+  - Treat keyword-generated labels as preliminary. Review all 200 rows
+    semantically in four separate batches, preserve whether review was AI or
+    human, and require explicit review provenance before publishing JSON.
+  - Preserve ambiguous-case notes and reviewer metadata in a committed CSV
+    audit trail.
+  - Automated tests assert zero overlap between golden set customer
+    tweet/author IDs and development data.
+- **Rationale**: The original draft contained 185 rows but only 167 unique
+  customer tweets and incorrectly described heuristic labels as hand
+  verified. The corrected workflow prevents duplicate weighting and makes the
+  provenance of every final label auditable. The current set is explicitly
+  AI-reviewed; independent human validation remains a documented limitation.
 - **Alternatives Rejected**: Synthetically generated evaluation examples (fails to reflect real customer spelling, brevity, and frustration) or evaluating on the development set (uncalibrated overoptimistic metrics).
 
 ---

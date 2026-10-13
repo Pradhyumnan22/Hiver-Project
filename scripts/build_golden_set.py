@@ -1,6 +1,14 @@
-"""Script to construct, annotate, and strictly validate the 200 golden evaluation examples from held-out eval partition."""
+"""Prepare and finalize a provenance-tracked golden evaluation set.
+
+Preparation creates a deterministic, de-duplicated CSV review queue with
+preliminary heuristic labels. Finalization refuses to publish the JSON golden
+set until every row has explicit semantic-review provenance.
+"""
+import argparse
+import csv
 import json
-import re
+import random
+from datetime import datetime, timezone
 from pathlib import Path
 from typing import List
 from src.data.intent_taxonomy import Action, EscalationReason, GoldenEvaluationExample, Intent
@@ -10,6 +18,10 @@ logger = setup_logger("build_golden_set")
 
 EVAL_PAIRS_PATH = Path("data/processed/eval_pairs.json")
 OUTPUT_GOLDEN_PATH = Path("data/processed/golden_eval_set.json")
+REVIEW_QUEUE_PATH = Path("data/annotations/golden_review.csv")
+REVIEW_BATCH_DIR = Path("data/annotations/reviews")
+TARGET_SIZE = 200
+SEED = 42
 
 
 def classify_candidate(text: str, brand_reply: str):
@@ -109,34 +121,47 @@ def classify_candidate(text: str, brand_reply: str):
     )
 
 
-def build_golden_set():
+def prepare_review_queue() -> None:
+    """Create a deterministic review queue without claiming human verification."""
     logger.info(f"Loading held-out evaluation pairs from {EVAL_PAIRS_PATH}")
     with open(EVAL_PAIRS_PATH, "r", encoding="utf-8") as f:
         eval_pairs = json.load(f)
 
-    # Stratify across intents
-    buckets = {intent: [] for intent in Intent}
+    # A customer tweet can have multiple brand replies. Keep one source row per
+    # customer message so evaluation metrics cannot count the same input twice.
+    unique_pairs = {}
+    for pair in eval_pairs:
+        unique_pairs.setdefault(int(pair["customer_tweet_id"]), pair)
 
-    for p in eval_pairs:
+    buckets = {intent: [] for intent in Intent}
+    for p in unique_pairs.values():
         text = p["cleaned_customer_text"]
         brand_reply = p["cleaned_brand_text"]
         intent, action, reason, notes = classify_candidate(text, brand_reply)
-
-        example = GoldenEvaluationExample(
-            id=f"gold_{p['customer_tweet_id']}",
-            customer_tweet_id=p["customer_tweet_id"],
-            customer_author_id=p["customer_author_id"],
-            customer_message=p["customer_text"],
-            cleaned_customer_message=p["cleaned_customer_text"],
-            conversation_context=f"Customer reached out to @AmazonHelp via Twitter.",
-            expected_intent=intent,
-            expected_action=action,
-            escalation_reason=reason,
-            annotation_notes=notes,
-            historical_brand_reply=p["cleaned_brand_text"],
-            is_synthetic=False,
+        buckets[intent].append(
+            {
+                "id": f"gold_{p['customer_tweet_id']}",
+                "source_pair_id": p["pair_id"],
+                "customer_tweet_id": p["customer_tweet_id"],
+                "brand_tweet_id": p["brand_tweet_id"],
+                "customer_author_id": p["customer_author_id"],
+                "cleaned_customer_message": p["cleaned_customer_text"],
+                "conversation_context": (
+                    "Direct customer-to-brand turn; no earlier conversation "
+                    "turn was preserved by the source-pair extraction."
+                ),
+                "historical_brand_reply": p["cleaned_brand_text"],
+                "expected_intent": intent.value,
+                "expected_action": action.value,
+                "escalation_reason": reason.value,
+                "annotation_notes": notes,
+                "is_synthetic": "false",
+                "review_status": "pending",
+                "reviewer_id": "",
+                "reviewed_at": "",
+                "review_notes": "",
+            }
         )
-        buckets[intent].append(example)
 
     # Target: 200 total examples balanced across all 7 intents
     # Minimum 15 per intent, with larger allocations for primary customer contact drivers
@@ -150,26 +175,178 @@ def build_golden_set():
         Intent.OTHER_UNKNOWN: 20,
     }
 
-    selected_examples: List[GoldenEvaluationExample] = []
+    rng = random.Random(SEED)
+    for available in buckets.values():
+        available.sort(key=lambda row: int(row["customer_tweet_id"]))
+        rng.shuffle(available)
+
+    selected_examples: List[dict] = []
+    selected_ids = set()
     for intent, count in allocations.items():
         available = buckets[intent]
-        if len(available) < count:
-            logger.warning(f"Intent {intent.value} has only {len(available)} candidates; taking all.")
-            selected_examples.extend(available)
-        else:
-            selected_examples.extend(available[:count])
+        chosen = available[:count]
+        selected_examples.extend(chosen)
+        selected_ids.update(row["customer_tweet_id"] for row in chosen)
+        if len(chosen) < count:
+            logger.warning(
+                f"Intent {intent.value} has {len(chosen)} unique candidates "
+                f"for a target of {count}; shortfall will be backfilled."
+            )
 
-    logger.info(f"Total golden examples assembled: {len(selected_examples)}")
+    # Backfill sparse intent allocations while retaining one row per tweet.
+    remainder = [
+        row
+        for available in buckets.values()
+        for row in available
+        if row["customer_tweet_id"] not in selected_ids
+    ]
+    rng.shuffle(remainder)
+    selected_examples.extend(remainder[: TARGET_SIZE - len(selected_examples)])
+    selected_examples.sort(key=lambda row: (row["expected_intent"], int(row["customer_tweet_id"])))
 
-    # Verify every example passes Pydantic model validation
-    validated_data = [ex.model_dump() for ex in selected_examples]
+    if len(selected_examples) != TARGET_SIZE:
+        raise ValueError(
+            f"Could only prepare {len(selected_examples)} unique examples; "
+            f"{TARGET_SIZE} are required."
+        )
+
+    REVIEW_QUEUE_PATH.parent.mkdir(parents=True, exist_ok=True)
+    with open(REVIEW_QUEUE_PATH, "w", encoding="utf-8", newline="") as f:
+        writer = csv.DictWriter(f, fieldnames=list(selected_examples[0]))
+        writer.writeheader()
+        writer.writerows(selected_examples)
+    logger.info(
+        f"Prepared {len(selected_examples)} unique examples at {REVIEW_QUEUE_PATH}. "
+        "Labels are preliminary; semantic review is still required."
+    )
+
+
+def finalize_golden_set() -> None:
+    """Publish reviewed rows only after validating review provenance."""
+    with open(REVIEW_QUEUE_PATH, "r", encoding="utf-8", newline="") as f:
+        rows = list(csv.DictReader(f))
+
+    if len(rows) != TARGET_SIZE:
+        raise ValueError(f"Expected exactly {TARGET_SIZE} review rows, got {len(rows)}.")
+    tweet_ids = [int(row["customer_tweet_id"]) for row in rows]
+    if len(set(tweet_ids)) != TARGET_SIZE:
+        raise ValueError("Each golden example must have a unique customer_tweet_id.")
+
+    accepted_statuses = {"verified", "ai_reviewed"}
+    pending = [
+        row["id"]
+        for row in rows
+        if row["review_status"].strip().lower() not in accepted_statuses
+        or not row["reviewer_id"].strip()
+        or not row["reviewed_at"].strip()
+    ]
+    if pending:
+        raise ValueError(
+            f"{len(pending)} rows still require semantic review, reviewer_id, "
+            f"and reviewed_at; first pending IDs: {pending[:5]}"
+        )
+
+    validated = []
+    for row in rows:
+        example = GoldenEvaluationExample(
+            id=row["id"],
+            source_pair_id=row["source_pair_id"],
+            customer_tweet_id=int(row["customer_tweet_id"]),
+            brand_tweet_id=int(row["brand_tweet_id"]),
+            customer_author_id=row["customer_author_id"],
+            customer_message=row["cleaned_customer_message"],
+            cleaned_customer_message=row["cleaned_customer_message"],
+            conversation_context=row["conversation_context"],
+            expected_intent=row["expected_intent"],
+            expected_action=row["expected_action"],
+            escalation_reason=row["escalation_reason"],
+            annotation_notes=row["annotation_notes"],
+            historical_brand_reply=row["historical_brand_reply"],
+            is_synthetic=row["is_synthetic"].strip().lower() == "true",
+            annotation_method=(
+                "human_reviewed"
+                if row["review_status"].strip().lower() == "verified"
+                else "ai_manually_reviewed"
+            ),
+            reviewer_id=row["reviewer_id"].strip(),
+            reviewed_at=row["reviewed_at"].strip(),
+            review_notes=row["review_notes"].strip() or None,
+        )
+        validated.append(example.model_dump(mode="json"))
 
     OUTPUT_GOLDEN_PATH.parent.mkdir(parents=True, exist_ok=True)
     with open(OUTPUT_GOLDEN_PATH, "w", encoding="utf-8") as f:
-        json.dump(validated_data, f, indent=2)
+        json.dump(validated, f, indent=2)
+    logger.info(f"Published {len(validated)} reviewed examples to {OUTPUT_GOLDEN_PATH}")
 
-    logger.info(f"Saved verified golden evaluation set to {OUTPUT_GOLDEN_PATH}")
+
+def apply_ai_reviews() -> None:
+    """Merge independently reviewed batch files into the annotation audit CSV."""
+    with open(REVIEW_QUEUE_PATH, "r", encoding="utf-8", newline="") as f:
+        rows = list(csv.DictReader(f))
+        fieldnames = list(rows[0])
+
+    batch_paths = sorted(REVIEW_BATCH_DIR.glob("batch_*.json"))
+    reviews = {}
+    for path in batch_paths:
+        with open(path, "r", encoding="utf-8") as f:
+            for review in json.load(f):
+                review_id = review["id"]
+                if review_id in reviews:
+                    raise ValueError(f"Duplicate reviewed ID: {review_id}")
+                reviews[review_id] = review
+
+    queue_ids = {row["id"] for row in rows}
+    if set(reviews) != queue_ids:
+        missing = sorted(queue_ids - set(reviews))
+        extra = sorted(set(reviews) - queue_ids)
+        raise ValueError(f"Review coverage mismatch; missing={missing[:5]}, extra={extra[:5]}")
+
+    reviewed_at = datetime.now(timezone.utc).isoformat()
+    editable_fields = (
+        "expected_intent",
+        "expected_action",
+        "escalation_reason",
+        "annotation_notes",
+        "review_notes",
+    )
+    for row in rows:
+        review = reviews[row["id"]]
+        for field in editable_fields:
+            row[field] = review[field]
+        # Validate taxonomy and action/reason consistency before updating the CSV.
+        GoldenEvaluationExample(
+            id=row["id"],
+            customer_tweet_id=int(row["customer_tweet_id"]),
+            customer_author_id=row["customer_author_id"],
+            customer_message=row["cleaned_customer_message"],
+            cleaned_customer_message=row["cleaned_customer_message"],
+            expected_intent=row["expected_intent"],
+            expected_action=row["expected_action"],
+            escalation_reason=row["escalation_reason"],
+        )
+        row["review_status"] = "ai_reviewed"
+        row["reviewer_id"] = "cursor-ai-semantic-review-v1"
+        row["reviewed_at"] = reviewed_at
+
+    with open(REVIEW_QUEUE_PATH, "w", encoding="utf-8", newline="") as f:
+        writer = csv.DictWriter(f, fieldnames=fieldnames)
+        writer.writeheader()
+        writer.writerows(rows)
+    logger.info(f"Applied semantic reviews to {len(rows)} rows in {REVIEW_QUEUE_PATH}")
 
 
 if __name__ == "__main__":
-    build_golden_set()
+    parser = argparse.ArgumentParser()
+    parser.add_argument(
+        "command",
+        choices=("prepare", "apply-ai-reviews", "finalize"),
+        help="Prepare, apply semantic review batches, or finalize reviewed rows.",
+    )
+    args = parser.parse_args()
+    if args.command == "prepare":
+        prepare_review_queue()
+    elif args.command == "apply-ai-reviews":
+        apply_ai_reviews()
+    else:
+        finalize_golden_set()

@@ -1,6 +1,7 @@
 """Intent taxonomy definition and Golden Evaluation Example schema."""
 from enum import Enum
-from typing import List, Optional
+from datetime import datetime
+from typing import List, Literal, Optional
 from pydantic import BaseModel, Field, field_validator
 
 
@@ -34,9 +35,11 @@ class EscalationReason(str, Enum):
 
 
 class GoldenEvaluationExample(BaseModel):
-    """Schema for hand-verified ground truth evaluation examples."""
+    """Schema for provenance-tracked golden evaluation examples."""
     id: str = Field(description="Unique identifier for evaluation example")
+    source_pair_id: Optional[str] = None
     customer_tweet_id: int
+    brand_tweet_id: Optional[int] = None
     customer_author_id: str
     customer_message: str
     cleaned_customer_message: str
@@ -47,6 +50,12 @@ class GoldenEvaluationExample(BaseModel):
     annotation_notes: Optional[str] = None
     historical_brand_reply: Optional[str] = None
     is_synthetic: bool = False
+    annotation_method: Optional[
+        Literal["human_reviewed", "ai_manually_reviewed"]
+    ] = None
+    reviewer_id: Optional[str] = None
+    reviewed_at: Optional[datetime] = None
+    review_notes: Optional[str] = None
 
     @field_validator("escalation_reason")
     @classmethod

@@ -1,0 +1,402 @@
+[
+  {
+    "id": "gold_29512",
+    "expected_intent": "returns_refunds",
+    "expected_action": "escalate",
+    "escalation_reason": "refund_replacement_dispute",
+    "annotation_notes": "Customer cannot complete a specific return and needs case-level assistance.",
+    "review_notes": "Action corrected: the failed return requires case-specific intervention."
+  },
+  {
+    "id": "gold_30520",
+    "expected_intent": "returns_refunds",
+    "expected_action": "escalate",
+    "escalation_reason": "order_lookup_required",
+    "annotation_notes": "Return pickup timing conflicts with the scheduled window and requires pickup lookup.",
+    "review_notes": "Action corrected: the pickup scheduling discrepancy requires order lookup."
+  },
+  {
+    "id": "gold_40397",
+    "expected_intent": "returns_refunds",
+    "expected_action": "escalate",
+    "escalation_reason": "refund_replacement_dispute",
+    "annotation_notes": "Customer disputes the refusal to collect a damaged-product return.",
+    "review_notes": "Action corrected: this is a disputed return arrangement, not generic guidance."
+  },
+  {
+    "id": "gold_40421",
+    "expected_intent": "returns_refunds",
+    "expected_action": "escalate",
+    "escalation_reason": "refund_replacement_dispute",
+    "annotation_notes": "Customer cannot complete the return of a damaged product.",
+    "review_notes": "Action corrected: the specific damaged-item return needs intervention."
+  },
+  {
+    "id": "gold_40423",
+    "expected_intent": "returns_refunds",
+    "expected_action": "escalate",
+    "escalation_reason": "ambiguous_unsupported",
+    "annotation_notes": "Customer appears to dispute a self-return resolution, but the message is fragmentary.",
+    "review_notes": "Action corrected; exact requested resolution remains ambiguous."
+  },
+  {
+    "id": "gold_47873",
+    "expected_intent": "returns_refunds",
+    "expected_action": "auto_handle",
+    "escalation_reason": "none",
+    "annotation_notes": "Customer asks about a third-party seller return policy.",
+    "review_notes": "Message is truncated, but the return-policy topic is clear from the reply context."
+  },
+  {
+    "id": "gold_60276",
+    "expected_intent": "returns_refunds",
+    "expected_action": "escalate",
+    "escalation_reason": "refund_replacement_dispute",
+    "annotation_notes": "Credit-card reward points were not refunded after cancellation.",
+    "review_notes": "Action corrected: a specific missing refund requires account-level review."
+  },
+  {
+    "id": "gold_63817",
+    "expected_intent": "returns_refunds",
+    "expected_action": "escalate",
+    "escalation_reason": "refund_replacement_dispute",
+    "annotation_notes": "Customer disputes a denied refund for an empty-box delivery.",
+    "review_notes": "Action corrected: this is an active refund denial dispute."
+  },
+  {
+    "id": "gold_65869",
+    "expected_intent": "returns_refunds",
+    "expected_action": "escalate",
+    "escalation_reason": "refund_replacement_dispute",
+    "annotation_notes": "Return pickup was refused after the customer initiated a return.",
+    "review_notes": "Action corrected: failed pickup and fraud allegation require case review."
+  },
+  {
+    "id": "gold_71875",
+    "expected_intent": "damaged_defective_item",
+    "expected_action": "escalate",
+    "escalation_reason": "high_sentiment_risk",
+    "annotation_notes": "Wrong product received; customer demands replacement and threatens legal action.",
+    "review_notes": "Intent corrected from returns; legal threat makes sentiment risk primary."
+  },
+  {
+    "id": "gold_71895",
+    "expected_intent": "damaged_defective_item",
+    "expected_action": "escalate",
+    "escalation_reason": "refund_replacement_dispute",
+    "annotation_notes": "Empty box received and customer seeks reconsideration of a refund.",
+    "review_notes": "Intent and action corrected: empty-box claim needs refund review."
+  },
+  {
+    "id": "gold_73432",
+    "expected_intent": "returns_refunds",
+    "expected_action": "auto_handle",
+    "escalation_reason": "none",
+    "annotation_notes": "General question about canceling an exchange and requesting a refund.",
+    "review_notes": ""
+  },
+  {
+    "id": "gold_96683",
+    "expected_intent": "damaged_defective_item",
+    "expected_action": "escalate",
+    "escalation_reason": "refund_replacement_dispute",
+    "annotation_notes": "Laptop appears previously used with reduced warranty; customer requests a refund.",
+    "review_notes": "Intent and action corrected: received-item condition and refund need review."
+  },
+  {
+    "id": "gold_99827",
+    "expected_intent": "returns_refunds",
+    "expected_action": "auto_handle",
+    "escalation_reason": "none",
+    "annotation_notes": "General question about return and refund timelines.",
+    "review_notes": ""
+  },
+  {
+    "id": "gold_99867",
+    "expected_intent": "returns_refunds",
+    "expected_action": "escalate",
+    "escalation_reason": "refund_replacement_dispute",
+    "annotation_notes": "Refund remains unprocessed after return pickup.",
+    "review_notes": "Action corrected: missing refund requires transaction review."
+  },
+  {
+    "id": "gold_101743",
+    "expected_intent": "product_inquiry_availability",
+    "expected_action": "escalate",
+    "escalation_reason": "refund_replacement_dispute",
+    "annotation_notes": "Customer disputes a post-purchase price drop and asks for a price adjustment or return.",
+    "review_notes": "Intent and action corrected: this is a pricing/refund dispute."
+  },
+  {
+    "id": "gold_114361",
+    "expected_intent": "returns_refunds",
+    "expected_action": "escalate",
+    "escalation_reason": "refund_replacement_dispute",
+    "annotation_notes": "Locker return has not been acknowledged in return status.",
+    "review_notes": "Action corrected: missing return confirmation requires case lookup."
+  },
+  {
+    "id": "gold_123413",
+    "expected_intent": "damaged_defective_item",
+    "expected_action": "escalate",
+    "escalation_reason": "refund_replacement_dispute",
+    "annotation_notes": "Duvet cover arrived with a burn hole and the customer intends to return it.",
+    "review_notes": "Intent and action corrected: damaged item with requested return."
+  },
+  {
+    "id": "gold_123418",
+    "expected_intent": "returns_refunds",
+    "expected_action": "auto_handle",
+    "escalation_reason": "none",
+    "annotation_notes": "General pre-purchase question about locating seller return policies.",
+    "review_notes": ""
+  },
+  {
+    "id": "gold_5300",
+    "expected_intent": "other_unknown",
+    "expected_action": "auto_handle",
+    "escalation_reason": "none",
+    "annotation_notes": "Positive feedback about a fast Prime Now delivery.",
+    "review_notes": "Intent corrected: this is praise, not a subscription inquiry."
+  },
+  {
+    "id": "gold_16762",
+    "expected_intent": "other_unknown",
+    "expected_action": "escalate",
+    "escalation_reason": "ambiguous_unsupported",
+    "annotation_notes": "Frustrated complaint about missed contact without a clear underlying issue.",
+    "review_notes": "Intent and action corrected; historical reply confirms clarification is needed."
+  },
+  {
+    "id": "gold_17216",
+    "expected_intent": "order_status_delivery",
+    "expected_action": "escalate",
+    "escalation_reason": "order_lookup_required",
+    "annotation_notes": "Prime order is late and requires delivery-status investigation.",
+    "review_notes": "Intent and action corrected: the core issue is a specific delayed parcel."
+  },
+  {
+    "id": "gold_22219",
+    "expected_intent": "subscription_digital",
+    "expected_action": "escalate",
+    "escalation_reason": "refund_replacement_dispute",
+    "annotation_notes": "Late expiry notice led the customer to renew Prime at a higher price.",
+    "review_notes": "Action corrected: membership pricing dispute requires account review."
+  },
+  {
+    "id": "gold_22554",
+    "expected_intent": "other_unknown",
+    "expected_action": "escalate",
+    "escalation_reason": "ambiguous_unsupported",
+    "annotation_notes": "Severe service complaint with no specific underlying problem stated.",
+    "review_notes": "Intent and action corrected; the issue cannot be identified from preserved context."
+  },
+  {
+    "id": "gold_24996",
+    "expected_intent": "subscription_digital",
+    "expected_action": "escalate",
+    "escalation_reason": "refund_replacement_dispute",
+    "annotation_notes": "Customer reports an unwanted Prime membership and difficulty contacting support.",
+    "review_notes": "Action corrected: unwanted membership requires account-level resolution."
+  },
+  {
+    "id": "gold_26880",
+    "expected_intent": "account_access_security",
+    "expected_action": "escalate",
+    "escalation_reason": "account_security_pii",
+    "annotation_notes": "Recurring Prime charge is unauthorized because the customer is not a subscriber.",
+    "review_notes": "Intent and action corrected: unauthorized charges follow account-security policy."
+  },
+  {
+    "id": "gold_33303",
+    "expected_intent": "order_status_delivery",
+    "expected_action": "escalate",
+    "escalation_reason": "order_lookup_required",
+    "annotation_notes": "Specific order is three days late and has not arrived.",
+    "review_notes": "Intent and action corrected: delivery lookup is required."
+  },
+  {
+    "id": "gold_39583",
+    "expected_intent": "order_status_delivery",
+    "expected_action": "escalate",
+    "escalation_reason": "order_lookup_required",
+    "annotation_notes": "Orders are marked delivered but not received; customer also reports poor support.",
+    "review_notes": "Intent and reason corrected: missing delivered orders require lookup."
+  },
+  {
+    "id": "gold_43733",
+    "expected_intent": "order_status_delivery",
+    "expected_action": "escalate",
+    "escalation_reason": "order_lookup_required",
+    "annotation_notes": "Repeated late deliveries affect a specific recent Prime order.",
+    "review_notes": "Intent and action corrected: delivery-date verification requires order lookup."
+  },
+  {
+    "id": "gold_52919",
+    "expected_intent": "subscription_digital",
+    "expected_action": "escalate",
+    "escalation_reason": "refund_replacement_dispute",
+    "annotation_notes": "Student Prime account change resulted in a credit-card billing issue.",
+    "review_notes": "Action corrected: membership billing issue needs account review."
+  },
+  {
+    "id": "gold_60234",
+    "expected_intent": "subscription_digital",
+    "expected_action": "auto_handle",
+    "escalation_reason": "none",
+    "annotation_notes": "Prime Video compatibility complaint on an Amazon device.",
+    "review_notes": ""
+  },
+  {
+    "id": "gold_61025",
+    "expected_intent": "subscription_digital",
+    "expected_action": "escalate",
+    "escalation_reason": "refund_replacement_dispute",
+    "annotation_notes": "Customer disputes a Prime charge after changing country of residence.",
+    "review_notes": ""
+  },
+  {
+    "id": "gold_65827",
+    "expected_intent": "order_status_delivery",
+    "expected_action": "escalate",
+    "escalation_reason": "order_lookup_required",
+    "annotation_notes": "Customer reports recurring problems with the Amazon Logistics carrier.",
+    "review_notes": "Intent and action corrected: carrier preference changes require account/order access."
+  },
+  {
+    "id": "gold_67460",
+    "expected_intent": "order_status_delivery",
+    "expected_action": "escalate",
+    "escalation_reason": "order_lookup_required",
+    "annotation_notes": "Multiple orders are lost in transit with no update or refund.",
+    "review_notes": "Intent and reason corrected: lost shipments require order investigation."
+  },
+  {
+    "id": "gold_67464",
+    "expected_intent": "order_status_delivery",
+    "expected_action": "escalate",
+    "escalation_reason": "order_lookup_required",
+    "annotation_notes": "Prime customer reports a delayed order shown in linked context.",
+    "review_notes": "Intent and action corrected; reply context clarifies a delivery delay."
+  },
+  {
+    "id": "gold_71906",
+    "expected_intent": "subscription_digital",
+    "expected_action": "auto_handle",
+    "escalation_reason": "none",
+    "annotation_notes": "Question about when a movie will become available on Prime Video.",
+    "review_notes": ""
+  },
+  {
+    "id": "gold_74749",
+    "expected_intent": "account_access_security",
+    "expected_action": "escalate",
+    "escalation_reason": "account_security_pii",
+    "annotation_notes": "Customer reports an unknown charge unrelated to orders or subscriptions.",
+    "review_notes": "Intent and action corrected: unknown charge is an account-security issue."
+  },
+  {
+    "id": "gold_77472",
+    "expected_intent": "subscription_digital",
+    "expected_action": "escalate",
+    "escalation_reason": "refund_replacement_dispute",
+    "annotation_notes": "Customer asks to cancel a channel subscribed through Prime.",
+    "review_notes": "Action corrected under the guide rule for cancellations requiring account changes."
+  },
+  {
+    "id": "gold_77628",
+    "expected_intent": "order_status_delivery",
+    "expected_action": "escalate",
+    "escalation_reason": "order_lookup_required",
+    "annotation_notes": "Complaint indicates a Prime delivery may have missed its promised date.",
+    "review_notes": "Intent and action corrected; wording is terse, but reply context identifies delivery delay."
+  },
+  {
+    "id": "gold_83489",
+    "expected_intent": "subscription_digital",
+    "expected_action": "auto_handle",
+    "escalation_reason": "none",
+    "annotation_notes": "General question about benefits included with Amazon Prime.",
+    "review_notes": ""
+  },
+  {
+    "id": "gold_98579",
+    "expected_intent": "order_status_delivery",
+    "expected_action": "escalate",
+    "escalation_reason": "order_lookup_required",
+    "annotation_notes": "Prime delivery was postponed by a week and may miss its expected date.",
+    "review_notes": "Intent and action corrected: specific delivery status needs verification."
+  },
+  {
+    "id": "gold_99959",
+    "expected_intent": "order_status_delivery",
+    "expected_action": "escalate",
+    "escalation_reason": "order_lookup_required",
+    "annotation_notes": "Delivery is overdue after a failed reattempt and no new date is available.",
+    "review_notes": "Intent and action corrected: specific overdue order requires lookup."
+  },
+  {
+    "id": "gold_108091",
+    "expected_intent": "order_status_delivery",
+    "expected_action": "escalate",
+    "escalation_reason": "order_lookup_required",
+    "annotation_notes": "Prime order expected today was delayed by up to two days.",
+    "review_notes": "Intent and action corrected: specific shipment status requires lookup."
+  },
+  {
+    "id": "gold_109788",
+    "expected_intent": "product_inquiry_availability",
+    "expected_action": "auto_handle",
+    "escalation_reason": "none",
+    "annotation_notes": "Question about whether a Kindle promotion will be offered.",
+    "review_notes": "Intent corrected: this concerns a physical product promotion."
+  },
+  {
+    "id": "gold_109790",
+    "expected_intent": "product_inquiry_availability",
+    "expected_action": "auto_handle",
+    "escalation_reason": "none",
+    "annotation_notes": "Question about the end date of a Kindle promotion.",
+    "review_notes": "Intent corrected: this concerns a physical product promotion."
+  },
+  {
+    "id": "gold_111924",
+    "expected_intent": "subscription_digital",
+    "expected_action": "auto_handle",
+    "escalation_reason": "none",
+    "annotation_notes": "General question about whether Prime Video is included with Prime membership.",
+    "review_notes": ""
+  },
+  {
+    "id": "gold_115845",
+    "expected_intent": "other_unknown",
+    "expected_action": "auto_handle",
+    "escalation_reason": "none",
+    "annotation_notes": "Positive comment about buying a Kindle during Black Friday.",
+    "review_notes": "Intent corrected: this is product praise with no support request."
+  },
+  {
+    "id": "gold_121120",
+    "expected_intent": "account_access_security",
+    "expected_action": "escalate",
+    "escalation_reason": "account_security_pii",
+    "annotation_notes": "Customer reports an unauthorized Prime credit-card charge.",
+    "review_notes": "Intent and action corrected: unauthorized charge requires secure verification."
+  },
+  {
+    "id": "gold_121133",
+    "expected_intent": "order_status_delivery",
+    "expected_action": "escalate",
+    "escalation_reason": "high_sentiment_risk",
+    "annotation_notes": "Order was left in an unsafe, publicly visible location.",
+    "review_notes": "Intent and action corrected: unsafe delivery placement presents safety risk."
+  },
+  {
+    "id": "gold_125378",
+    "expected_intent": "product_inquiry_availability",
+    "expected_action": "auto_handle",
+    "escalation_reason": "none",
+    "annotation_notes": "Question about the end date of a Kindle promotion.",
+    "review_notes": "Intent corrected: this concerns a physical product promotion."
+  }
+]

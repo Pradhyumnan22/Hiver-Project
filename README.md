@@ -69,7 +69,7 @@ pytest -v
 - [x] **Checkpoint 0**: Workspace and Git preflight
 - [x] **Checkpoint 1**: Project skeleton, configuration, logging, and smoke tests
 - [x] **Checkpoint 2**: Dataset ingestion, preprocessing, and brand selection (`AmazonHelp`)
-- [x] **Checkpoint 3**: Intent taxonomy and golden evaluation set (200 examples)
+- [x] **Checkpoint 3**: Intent taxonomy and golden evaluation set (200 unique, semantically reviewed examples)
 - [x] **Checkpoint 4**: Baselines (Majority-Class & TF-IDF + Logistic Regression)
 - [x] **Checkpoint 5**: Historical retrieval with FAISS and relevance thresholding
 - [ ] **Checkpoint 6**: AI agent pipeline with structured outputs and deterministic escalation
@@ -79,7 +79,9 @@ pytest -v
 
 ## Baseline Performance Results
 
-Evaluated on held-out **Golden Evaluation Set** (`data/processed/golden_eval_set.json`):
+The following legacy baseline results were produced against an automatically
+labelled draft and are retained for auditability only. They are **not valid
+headline results** and must be rerun against the corrected 200-example set.
 
 | Model | Classification Accuracy | Macro F1 | Escalation Accuracy | Escalation F1 | Avg Latency |
 | :--- | :--- | :--- | :--- | :--- | :--- |
@@ -110,7 +112,11 @@ Derived from customer interaction patterns on `AmazonHelp`:
 7. `other_unknown`: Unclear, ambiguous, or out-of-domain inquiries.
 
 - **Annotation Guide**: Documented in [`docs/annotation_guide.md`](docs/annotation_guide.md).
-- **Golden Set Benchmark**: 200 hand-verified examples stored in `data/processed/golden_eval_set.json` strictly held out from training/dev data.
+- **Golden Set Status**: 200 unique held-out examples were reviewed row by row
+  in four semantic-review batches. Provenance is retained in
+  `data/annotations/golden_review.csv`; records are explicitly marked
+  `ai_manually_reviewed`, not human-verified. Existing baseline metrics are
+  legacy drafts and must be rerun during the Checkpoint 4 repair.
 
 
 ## Data Preparation & Preprocessing

@@ -77,3 +77,44 @@ Every example in the golden evaluation set is labeled with:
 3. `refund_replacement_dispute`: Involves financial transactions, refund approvals, or replacement shipments.
 4. `ambiguous_unsupported`: Message cannot be mapped with confidence to supported knowledge or requires clarification.
 5. `high_sentiment_risk`: Severe customer frustration, legal threats, or safety hazards.
+
+---
+
+## 4. Review Procedure
+
+Run `python scripts/build_golden_set.py prepare` to create
+`data/annotations/golden_review.csv`. The command uses seed 42, removes
+duplicate customer tweet IDs, stratifies by preliminary intent, and backfills
+sparse categories to produce exactly 200 rows.
+
+The preliminary labels are keyword-assisted suggestions, not ground truth.
+For every row, a reviewer must:
+
+1. Read the cleaned customer message, available context, and historical reply.
+2. Confirm or correct `expected_intent`, `expected_action`,
+   `escalation_reason`, and `annotation_notes`.
+3. Record genuinely ambiguous choices in `review_notes`.
+4. Set `review_status` to `verified`, enter a stable non-secret
+   `reviewer_id`, and enter an ISO-8601 timestamp in `reviewed_at`.
+
+The historical reply may clarify what the customer meant, but it must not be
+treated as proof that the issue was resolved or that the response remains
+current policy.
+
+For the current benchmark, four independent AI review batches each received
+50 rows and applied the guide row by row. Their corrections were merged only
+after complete ID coverage and taxonomy validation. Final rows therefore use
+`annotation_method=ai_manually_reviewed`; they are not represented as
+human-verified. A human-reviewed subset and judge-human agreement remain work
+for Checkpoint 7, and no inter-annotator agreement is claimed here.
+
+After all rows are reviewed, run:
+
+```powershell
+python scripts/build_golden_set.py apply-ai-reviews
+python scripts/build_golden_set.py finalize
+```
+
+Finalization fails if the file does not contain exactly 200 unique customer
+tweets or any row lacks review provenance. The review CSV and four batch files
+are retained as the annotation audit trail.

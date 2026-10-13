@@ -1,4 +1,5 @@
 """Tests verifying the golden evaluation set schema, size, intent coverage, and strict zero-leakage."""
+import csv
 import json
 from pathlib import Path
 import pytest
@@ -6,6 +7,7 @@ from src.data.intent_taxonomy import Action, EscalationReason, GoldenEvaluationE
 
 GOLDEN_SET_PATH = Path("data/processed/golden_eval_set.json")
 DEV_PAIRS_PATH = Path("data/processed/dev_pairs.json")
+REVIEW_QUEUE_PATH = Path("data/annotations/golden_review.csv")
 
 
 @pytest.fixture
@@ -19,6 +21,26 @@ def golden_set():
 def test_golden_set_size_requirement(golden_set):
     """The assignment specifies a golden evaluation set of 150–250 examples."""
     assert 150 <= len(golden_set) <= 250, f"Expected 150-250 golden examples, got {len(golden_set)}"
+
+
+def test_review_queue_has_200_unique_real_examples():
+    with open(REVIEW_QUEUE_PATH, "r", encoding="utf-8", newline="") as f:
+        rows = list(csv.DictReader(f))
+
+    assert len(rows) == 200
+    assert len({row["id"] for row in rows}) == 200
+    assert len({row["customer_tweet_id"] for row in rows}) == 200
+    assert all(row["is_synthetic"] == "false" for row in rows)
+    assert {row["expected_intent"] for row in rows} == {
+        intent.value for intent in Intent
+    }
+
+
+def test_finalized_set_records_review_provenance(golden_set):
+    assert all(item.annotation_method == "ai_manually_reviewed" for item in golden_set)
+    assert all(item.reviewer_id for item in golden_set)
+    assert all(item.reviewed_at for item in golden_set)
+    assert len({item.customer_tweet_id for item in golden_set}) == len(golden_set)
 
 
 def test_all_seven_intents_represented(golden_set):
