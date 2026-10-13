@@ -1,0 +1,84 @@
+{
+  "method": "development-only author split; top-1 same-intent proxy",
+  "seed": 42,
+  "indexed_records": 3883,
+  "calibration_queries": 500,
+  "target_proxy_precision": 0.8,
+  "minimum_coverage": 0.1,
+  "selected_threshold": 0.65,
+  "limitations": "Same weakly supervised intent is a relevance proxy, not a human judgement. Final retrieval quality requires manual or judge review.",
+  "threshold_metrics": [
+    {
+      "threshold": 0.2,
+      "accepted": 500,
+      "coverage": 1.0,
+      "proxy_precision": 0.77
+    },
+    {
+      "threshold": 0.25,
+      "accepted": 500,
+      "coverage": 1.0,
+      "proxy_precision": 0.77
+    },
+    {
+      "threshold": 0.3,
+      "accepted": 500,
+      "coverage": 1.0,
+      "proxy_precision": 0.77
+    },
+    {
+      "threshold": 0.35,
+      "accepted": 500,
+      "coverage": 1.0,
+      "proxy_precision": 0.77
+    },
+    {
+      "threshold": 0.4,
+      "accepted": 498,
+      "coverage": 0.996,
+      "proxy_precision": 0.7691
+    },
+    {
+      "threshold": 0.45,
+      "accepted": 496,
+      "coverage": 0.992,
+      "proxy_precision": 0.7722
+    },
+    {
+      "threshold": 0.5,
+      "accepted": 490,
+      "coverage": 0.98,
+      "proxy_precision": 0.7735
+    },
+    {
+      "threshold": 0.55,
+      "accepted": 470,
+      "coverage": 0.94,
+      "proxy_precision": 0.7766
+    },
+    {
+      "threshold": 0.6,
+      "accepted": 430,
+      "coverage": 0.86,
+      "proxy_precision": 0.7884
+    },
+    {
+      "threshold": 0.65,
+      "accepted": 357,
+      "coverage": 0.714,
+      "proxy_precision": 0.8151
+    },
+    {
+      "threshold": 0.7,
+      "accepted": 258,
+      "coverage": 0.516,
+      "proxy_precision": 0.8488
+    },
+    {
+      "threshold": 0.75,
+      "accepted": 148,
+      "coverage": 0.296,
+      "proxy_precision": 0.8649
+    }
+  ]
+}

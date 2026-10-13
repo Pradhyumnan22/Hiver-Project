@@ -18,7 +18,7 @@ retrieval:
   faiss_index_path: "data/processed/knowledge_base.index"
   metadata_path: "data/processed/knowledge_metadata.json"
   top_k: 3
-  relevance_threshold: 0.45  # Cosine similarity cutoff for evidence grounding
+  relevance_threshold: 0.65  # Dev-calibrated for >=0.80 same-intent proxy precision
 
 agent:
   llm_model: "gpt-4o-mini"

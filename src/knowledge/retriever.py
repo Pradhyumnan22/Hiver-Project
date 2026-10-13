@@ -1,9 +1,9 @@
 """FAISS-based historical conversation retriever with strict leakage exclusion and relevance thresholding."""
 import json
+import re
 from pathlib import Path
-from typing import Any, Dict, List, Optional, Set, Tuple
-import numpy as np
-from pydantic import BaseModel, Field
+from typing import List, Optional, Set
+from pydantic import BaseModel
 from src.knowledge.embeddings import DenseEmbedder
 from src.utils.logging import setup_logger
 
@@ -39,7 +39,7 @@ class FAISSRetriever:
     def __init__(
         self,
         embedder: Optional[DenseEmbedder] = None,
-        relevance_threshold: float = 0.45,
+        relevance_threshold: float = 0.65,
     ):
         self.embedder = embedder or DenseEmbedder()
         self.relevance_threshold = relevance_threshold
@@ -47,14 +47,22 @@ class FAISSRetriever:
         self.index = None
         self._excluded_author_ids: Set[str] = set()
         self._excluded_tweet_ids: Set[int] = set()
+        self._excluded_text_fingerprints: Set[str] = set()
+
+    @staticmethod
+    def text_fingerprint(text: str) -> str:
+        """Canonicalize masked text for exact/formatting-variant deduplication."""
+        normalized = text.lower().replace("@user", " ").replace("<url>", " ")
+        return re.sub(r"[^a-z0-9]+", "", normalized)
 
     def build_index(
         self,
         records: List[HistoricalRecord],
         exclude_author_ids: Optional[Set[str]] = None,
         exclude_tweet_ids: Optional[Set[int]] = None,
+        exclude_texts: Optional[Set[str]] = None,
     ) -> "FAISSRetriever":
-        """Build FAISS index while strictly filtering out any held-out evaluation authors or tweets."""
+        """Build an index after leakage filtering and normalized-text deduplication."""
         try:
             import faiss
         except ImportError:
@@ -62,9 +70,13 @@ class FAISSRetriever:
 
         self._excluded_author_ids = exclude_author_ids or set()
         self._excluded_tweet_ids = exclude_tweet_ids or set()
+        self._excluded_text_fingerprints = {
+            self.text_fingerprint(text) for text in (exclude_texts or set())
+        }
 
         filtered_records = []
         filtered_texts = []
+        seen_text_fingerprints = set()
 
         for rec in records:
             # Strict leakage exclusion check
@@ -72,9 +84,15 @@ class FAISSRetriever:
                 continue
             if rec.customer_tweet_id in self._excluded_tweet_ids:
                 continue
+            fingerprint = self.text_fingerprint(rec.cleaned_customer_text)
+            if not fingerprint or fingerprint in self._excluded_text_fingerprints:
+                continue
+            if fingerprint in seen_text_fingerprints:
+                continue
 
             filtered_records.append(rec)
             filtered_texts.append(rec.cleaned_customer_text)
+            seen_text_fingerprints.add(fingerprint)
 
         logger.info(
             f"Building FAISS index: {len(filtered_records)} indexed records "
@@ -154,6 +172,8 @@ class FAISSRetriever:
     def save(self, index_path: Path | str, metadata_path: Path | str):
         """Persist FAISS index binary and metadata records."""
         import faiss
+        if self.index is None:
+            raise ValueError("Cannot save an empty or unbuilt index.")
 
         index_p = Path(index_path)
         meta_p = Path(metadata_path)
@@ -182,6 +202,6 @@ class FAISSRetriever:
         with open(meta_p, "r", encoding="utf-8") as f:
             meta_data = json.load(f)
         self.records = [HistoricalRecord(**r) for r in meta_data["records"]]
-        self.relevance_threshold = meta_data.get("relevance_threshold", 0.45)
+        self.relevance_threshold = meta_data.get("relevance_threshold", 0.65)
         logger.info(f"Loaded FAISS index with {self.index.ntotal} items from {index_p}.")
         return self

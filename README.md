@@ -137,3 +137,27 @@ python scripts/prepare_dataset.py --max-rows 150000 --sample-size 100
 - Sample fixture: `data/sample/sample_pairs.json` (committed to repository)
 - Processed splits: `data/processed/dev_pairs.json` (5,124 pairs) and `data/processed/eval_pairs.json` (1,292 pairs)
 
+## Historical Retrieval Calibration
+
+The FAISS index uses normalized `all-MiniLM-L6-v2` embeddings and exact inner
+product search. The production threshold is **0.65**, selected using 500
+development-only queries split by customer author:
+
+- Target same-intent proxy precision: **80%**
+- Measured proxy precision at 0.65: **81.51%**
+- Development coverage at 0.65: **71.40%**
+- Final index: **4,792** unique normalized customer messages
+
+Same-intent agreement is only a weak-supervision relevance proxy, not a human
+relevance judgement. The complete threshold curve and limitation are saved in
+`reports/retrieval_calibration.json`.
+
+```powershell
+python scripts/calibrate_retrieval.py
+python scripts/build_knowledge_base.py
+```
+
+The build excludes evaluation authors, tweet IDs, normalized evaluation text,
+and duplicate indexed text. Model download and index files are intentionally
+excluded from Git.
+

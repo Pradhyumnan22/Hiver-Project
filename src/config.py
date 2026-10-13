@@ -31,7 +31,7 @@ class RetrievalSettings(BaseModel):
     faiss_index_path: str = "data/processed/knowledge_base.index"
     metadata_path: str = "data/processed/knowledge_metadata.json"
     top_k: int = 3
-    relevance_threshold: float = 0.45
+    relevance_threshold: float = 0.65
 
 
 class AgentSettings(BaseModel):

@@ -144,9 +144,21 @@ This log records genuine, non-obvious engineering decisions, rationale, trade-of
 - **Date**: 2026-10-12
 - **Context**: Ensuring held-out evaluation pairs are never indexed or retrieved, and preventing hallucinated grounding on low-similarity queries.
 - **Decision**:
-  1. **Strict Exclusion Filter**: The indexing pipeline accepts explicit sets of `exclude_author_ids` and `exclude_tweet_ids`. Any interaction matching the held-out eval set or golden benchmark is filtered out before vector insertion.
-  2. **Relevance Thresholding**: Top-k retrieval enforces a minimum similarity score (default 0.45). If no candidate meets this threshold, the retriever flags `is_empty = True`, prompting the agent to rely on general policy knowledge or escalate rather than hallucinate using irrelevant historical context.
-- **Rationale**: Solves the critical RAG failure mode where irrelevant historical cases poison generation prompts.
+  1. **Strict Exclusion Filter**: Filter held-out author IDs, tweet IDs, and
+     normalized text fingerprints before indexing. De-duplicate remaining
+     development text by the same fingerprint.
+  2. **Relevance Thresholding**: Calibrate on a development-only 80/20 author
+     split using 500 queries. Select the highest-coverage candidate meeting
+     80% top-1 same-intent proxy precision and 10% minimum coverage.
+  3. The resulting threshold is **0.65**, with 81.51% proxy precision and
+     71.40% coverage. Persist the complete threshold curve in
+     `reports/retrieval_calibration.json`.
+  4. If no result meets 0.65, return an explicit empty result so the later
+     escalation layer cannot treat weak evidence as grounding.
+- **Rationale**: Replaces the original unvalidated 0.45 default with a
+  reproducible development-only operating point and reduces evaluation-text
+  leakage. Same-intent agreement is acknowledged as a weak proxy rather than
+  a human relevance label.
 - **Alternatives Rejected**: Unchecked top-k retrieval (always forcing k results regardless of relevance).
 
 

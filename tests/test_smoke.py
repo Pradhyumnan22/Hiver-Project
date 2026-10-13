@@ -17,7 +17,7 @@ def test_default_config_loading():
     assert config.project.name == "hiver-support-agent"
     assert config.data.selected_brand == "AmazonHelp"
     assert config.retrieval.top_k == 3
-    assert config.retrieval.relevance_threshold == 0.45
+    assert config.retrieval.relevance_threshold == 0.65
     assert config.agent.temperature == 0.0
 
 

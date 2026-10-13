@@ -6,6 +6,7 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 
 from src.config import load_config
+from scripts.build_golden_set import classify_candidate
 from src.knowledge.retriever import FAISSRetriever, HistoricalRecord
 from src.utils.logging import setup_logger
 
@@ -25,6 +26,7 @@ def main():
     # Collect all evaluation and golden authors and tweets for exclusion
     excluded_authors = set()
     excluded_tweets = set()
+    excluded_texts = set()
 
     if eval_path.exists():
         with open(eval_path, "r", encoding="utf-8") as f:
@@ -32,6 +34,7 @@ def main():
         for ep in eval_pairs:
             excluded_authors.add(ep["customer_author_id"])
             excluded_tweets.add(ep["customer_tweet_id"])
+            excluded_texts.add(ep["cleaned_customer_text"])
 
     if golden_path.exists():
         with open(golden_path, "r", encoding="utf-8") as f:
@@ -39,13 +42,19 @@ def main():
         for gp in golden_pairs:
             excluded_authors.add(gp["customer_author_id"])
             excluded_tweets.add(gp["customer_tweet_id"])
+            excluded_texts.add(gp["cleaned_customer_message"])
 
     logger.info(
         f"Strict leakage exclusion list prepared: {len(excluded_authors)} authors, {len(excluded_tweets)} tweet IDs."
     )
 
-    records = [
-        HistoricalRecord(
+    records = []
+    for p in dev_pairs:
+        intent, _, _, _ = classify_candidate(
+            p["cleaned_customer_text"],
+            p["cleaned_brand_text"],
+        )
+        records.append(HistoricalRecord(
             pair_id=p["pair_id"],
             customer_tweet_id=p["customer_tweet_id"],
             customer_author_id=p["customer_author_id"],
@@ -53,16 +62,15 @@ def main():
             cleaned_customer_text=p["cleaned_customer_text"],
             historical_brand_reply=p["brand_text"],
             cleaned_brand_reply=p["cleaned_brand_text"],
-            intent=p.get("intent"),
-        )
-        for p in dev_pairs
-    ]
+            intent=intent.value,
+        ))
 
     retriever = FAISSRetriever(relevance_threshold=config.retrieval.relevance_threshold)
     retriever.build_index(
         records,
         exclude_author_ids=excluded_authors,
         exclude_tweet_ids=excluded_tweets,
+        exclude_texts=excluded_texts,
     )
 
     index_path = Path(config.retrieval.faiss_index_path)

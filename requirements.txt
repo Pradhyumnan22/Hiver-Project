@@ -4,8 +4,8 @@ numpy>=1.24.0
 scikit-learn>=1.3.0
 
 # Vector Retrieval & Embeddings
-sentence-transformers>=2.2.0
-faiss-cpu>=1.7.4
+sentence-transformers>=3.0.0,<7.0.0
+faiss-cpu>=1.7.4,<2.0.0
 
 # Validation & Config
 pydantic>=2.5.0
