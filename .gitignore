@@ -24,6 +24,8 @@ data/raw/
 data/processed/*.json
 data/processed/*.index
 !data/processed/golden_eval_set.json
+!data/processed/knowledge_metadata.json
+!data/processed/knowledge_base.index
 *.csv.zip
 *.tar.gz
 *.parquet
@@ -37,6 +39,7 @@ data/processed/*.index
 *.pt
 *.bin
 *.onnx
+!data/processed/knowledge_base.index
 
 # IDE & OS files
 .vscode/

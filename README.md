@@ -64,6 +64,14 @@ cp .env.example .env
 pytest -v
 ```
 
+### 4. Run the local draft app
+
+```powershell
+.\.venv\Scripts\python.exe -m uvicorn src.api.app:app --host 127.0.0.1 --port 8000
+```
+
+Open `http://127.0.0.1:8000`. The page creates offline drafts and does not send them to customers. The first draft loads the embedding model and can take about a minute.
+
 Tests, baseline code, and escalation checks run without an API key. The saved live benchmark completed in 83.2 seconds with the local FAISS index already built. Rebuilding that index requires the Kaggle `twcs.csv` file and a one-time Sentence Transformer download. Raw tweets, the vector index, and `.env` are not committed. Re-running `scripts/evaluate_agent.py` calls the API again and can change judge wording, so the committed `reports/agent_results.json` is the reference result.
 
 ## Checkpoint Status
