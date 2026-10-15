@@ -1,6 +1,6 @@
 """Minimal structured-output LLM abstraction and OpenAI-compatible client."""
-import json
 from typing import Protocol, TypeVar
+from threading import Lock
 
 from pydantic import BaseModel, ValidationError
 
@@ -33,6 +33,10 @@ class OpenAIStructuredLLM:
         from openai import OpenAI
 
         self.settings = settings
+        self.prompt_tokens = 0
+        self.completion_tokens = 0
+        self.requests = 0
+        self._usage_lock = Lock()
         self.client = OpenAI(
             api_key=settings.api_key,
             base_url=settings.base_url,
@@ -46,7 +50,7 @@ class OpenAIStructuredLLM:
         output_model: type[StructuredOutput],
     ) -> StructuredOutput:
         try:
-            response = self.client.chat.completions.create(
+            response = self.client.chat.completions.parse(
                 model=self.settings.llm_model,
                 temperature=self.settings.temperature,
                 max_tokens=self.settings.max_tokens,
@@ -54,22 +58,29 @@ class OpenAIStructuredLLM:
                     {"role": "system", "content": system_prompt},
                     {"role": "user", "content": user_prompt},
                 ],
-                response_format={
-                    "type": "json_schema",
-                    "json_schema": {
-                        "name": output_model.__name__,
-                        "strict": True,
-                        "schema": output_model.model_json_schema(),
-                    },
-                },
+                response_format=output_model,
             )
-            content = response.choices[0].message.content
-            if not content:
+            parsed = response.choices[0].message.parsed
+            if parsed is None:
                 raise LLMResponseError("LLM returned an empty response.")
-            return output_model.model_validate(json.loads(content))
-        except (json.JSONDecodeError, ValidationError, IndexError, AttributeError) as exc:
+            with self._usage_lock:
+                self.requests += 1
+                if response.usage is not None:
+                    self.prompt_tokens += int(response.usage.prompt_tokens or 0)
+                    self.completion_tokens += int(response.usage.completion_tokens or 0)
+            return output_model.model_validate(parsed)
+        except (ValidationError, IndexError, AttributeError) as exc:
             raise LLMResponseError(f"Invalid structured LLM response: {exc}") from exc
         except LLMResponseError:
             raise
         except Exception as exc:
             raise LLMResponseError(f"LLM request failed: {exc}") from exc
+
+    @property
+    def usage(self) -> dict[str, int]:
+        return {
+            "requests": self.requests,
+            "prompt_tokens": self.prompt_tokens,
+            "completion_tokens": self.completion_tokens,
+            "total_tokens": self.prompt_tokens + self.completion_tokens,
+        }

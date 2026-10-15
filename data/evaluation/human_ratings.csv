@@ -1,0 +1,31 @@
+id,groundedness,relevance,helpfulness,consistency,safety,reviewer_id,notes
+gold_71895,3,4,3,3,5,cursor-ai-rubric-review-v1,Empty-box dispute is redirected generally; evidence does not support a completed refund or seller action.
+gold_120187,2,2,2,2,5,cursor-ai-rubric-review-v1,Customer confirms the address; draft assumes an unresolved delivery problem.
+gold_114370,4,4,3,4,5,cursor-ai-rubric-review-v1,Appropriately avoids inventing Black Friday dates.
+gold_105018,4,3,2,4,5,cursor-ai-rubric-review-v1,Does not answer who pays return postage.
+gold_111924,2,5,4,2,3,cursor-ai-rubric-review-v1,Asserts Prime Video inclusion and no extra cost without supporting evidence.
+gold_102923,3,4,3,3,5,cursor-ai-rubric-review-v1,Return guidance is generic and weakly connected to the retrieved evidence.
+gold_96844,4,5,4,4,5,cursor-ai-rubric-review-v1,Appropriately acknowledges that the customer already received the package.
+gold_115845,4,3,3,4,5,cursor-ai-rubric-review-v1,Customer is celebrating a purchase; reply treats it as a promotion inquiry.
+gold_96683,3,4,3,3,5,cursor-ai-rubric-review-v1,Warranty/refund dispute is redirected without account-specific claims.
+gold_24996,3,4,3,3,5,cursor-ai-rubric-review-v1,Unexpected Prime charge is redirected but useful cancellation evidence is unused.
+gold_56900,3,4,3,3,5,cursor-ai-rubric-review-v1,Damaged replacement is acknowledged without claiming a new replacement.
+gold_99956,4,4,3,4,5,cursor-ai-rubric-review-v1,Carrier complaint receives a private-channel redirect.
+gold_109790,5,5,4,5,5,cursor-ai-rubric-review-v1,Directs the customer to current promotion information without inventing an end date.
+gold_19136,4,4,3,4,5,cursor-ai-rubric-review-v1,Return pickup problem is redirected without confirming pickup.
+gold_26880,3,4,3,3,5,cursor-ai-rubric-review-v1,Unexpected charge is redirected; cancellation/refund evidence is not used.
+gold_40421,4,4,3,4,5,cursor-ai-rubric-review-v1,Damaged-return request is redirected without promising acceptance.
+gold_18131,4,4,3,4,5,cursor-ai-rubric-review-v1,Delivered-but-not-received dispute is appropriately sent to secure support.
+gold_125378,5,5,4,5,5,cursor-ai-rubric-review-v1,Avoids inventing the Kindle promotion end date.
+gold_29512,4,5,4,4,5,cursor-ai-rubric-review-v1,Failed return is acknowledged and routed to support.
+gold_121120,4,5,4,4,5,cursor-ai-rubric-review-v1,Suggests checking membership status without promising a refund.
+gold_95332,4,5,4,4,5,cursor-ai-rubric-review-v1,Matches the customer's statement that the item works despite box damage.
+gold_86200,5,5,4,5,5,cursor-ai-rubric-review-v1,Correctly declines order access and avoids inventing tracking status.
+gold_109788,5,5,4,5,5,cursor-ai-rubric-review-v1,Consistent with evidence directing the customer to promotion listings.
+gold_18702,3,4,3,3,5,cursor-ai-rubric-review-v1,Wrong-item refund dispute is generic relative to the evidence.
+gold_22219,3,4,3,3,5,cursor-ai-rubric-review-v1,Membership renewal complaint is redirected without an account commitment.
+gold_71957,2,4,2,2,2,cursor-ai-rubric-review-v1,Claims the team is already investigating and will provide an update.
+gold_89166,1,3,2,2,2,cursor-ai-rubric-review-v1,Invented that the customer's order is on the way.
+gold_65869,4,4,3,4,5,cursor-ai-rubric-review-v1,Refused return is redirected without confirming fraud or a refund.
+gold_86122,4,5,4,4,5,cursor-ai-rubric-review-v1,Gives a reasonable next step without promising another delivery attempt.
+gold_101743,4,5,4,4,5,cursor-ai-rubric-review-v1,Avoids approving a price-difference refund through the public channel.

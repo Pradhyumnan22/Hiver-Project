@@ -195,4 +195,26 @@ This log records genuine, non-obvious engineering decisions, rationale, trade-of
 - **Alternatives Rejected**: Asking the same LLM to approve its own draft or
   auto-handling when retrieval is empty.
 
+---
+
+### Decision 13: Five-Criterion Judge With Independent Human Scores
+- **Date**: 2026-10-13
+- **Context**: Evaluating reply quality without presenting an LLM preference
+  score as objective ground truth.
+- **Decision**: Score groundedness, relevance, helpfulness, consistency, and
+  safety separately on documented 1–5 anchors. Require an explanation for
+  every judge score. Collect human scores without exposing judge scores, then
+  report exact agreement, agreement within one point, and quadratic-weighted
+  Cohen’s kappa per criterion and pooled.
+- **Rationale**: Separate dimensions expose trade-offs hidden by one overall
+  score. Agreement statistics quantify whether the automated judge resembles
+  the human reviewer rather than assuming it does.
+- **Measured Result**: The 200-example run used `gpt-4o-mini` at temperature
+  0.0. A separate AI reviewer scored 30 blinded drafts. Pooled quadratic
+  weighted kappa was 0.4559. This is not human agreement.
+- **Current Limitation**: No independent human rater completed the subset, so
+  judge–human agreement remains unavailable.
+- **Alternatives Rejected**: Keyword-based reply quality, BLEU/ROUGE against a
+  single historical reply, and invented agreement figures.
+
 

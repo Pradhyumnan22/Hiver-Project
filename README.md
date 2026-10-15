@@ -73,7 +73,7 @@ pytest -v
 - [x] **Checkpoint 4**: Baselines (Majority-Class & TF-IDF + Logistic Regression)
 - [x] **Checkpoint 5**: Historical retrieval with FAISS and relevance thresholding
 - [x] **Checkpoint 6**: AI agent pipeline with structured outputs and deterministic escalation
-- [ ] **Checkpoint 7**: Evaluation harness and LLM judge agreement
+- [x] **Checkpoint 7**: Evaluation harness and LLM judge agreement (AI reviewer; no independent human validation)
 - [ ] **Checkpoint 8**: Failure analysis, headline number critique, and decision log
 - [ ] **Checkpoint 9**: Final reproducibility verification and release
 
@@ -179,4 +179,33 @@ Historical responses are examples of past handling—not verified resolutions
 or current policy. Replies are offline drafts and are never published to real
 customers. Unit and integration tests use deterministic fake LLM responses,
 so no API credential is required.
+
+## Agent Evaluation and LLM Judge
+
+The live evaluation command measures intent classification, escalation,
+retrieval coverage, reply quality, latency, and token usage on fixed golden
+inputs:
+
+```powershell
+python scripts/evaluate_agent.py
+```
+
+Use `--limit N` only for smoke tests and `--skip-judge` to evaluate the agent
+without reply-quality judging. The five-criterion 1–5 rubric is documented in
+`docs/evaluation_rubric.md`.
+
+The 200-example live run is saved in `reports/agent_results.json`:
+
+- Classification accuracy: **76.00%**; macro F1: **0.7368**
+- Escalation F1: **0.6909**; escalation accuracy: **57.50%**
+- Retrieval coverage: **68.00%**
+- Judge mean scores on 80 drafts: groundedness **3.25**, relevance **4.89**,
+  helpfulness **3.29**, consistency **4.30**, safety **5.00**
+- Wall time: **83.2 seconds**; agent tokens: **107,943**; judge tokens: **70,680**
+
+A blinded 30-response subset was scored by `cursor-ai-rubric-review-v1`.
+Pooled exact agreement with the judge is **50.67%**, within-one agreement is
+**88.00%**, and quadratic-weighted Cohen's kappa is **0.4559**. This is
+AI–judge agreement, not independent human validation. USD cost is omitted
+because pricing is not assumed.
 

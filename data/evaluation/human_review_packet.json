@@ -1,0 +1,567 @@
+[
+  {
+    "id": "gold_71895",
+    "customer_message": "@user Dear team amazon, i am not getting any response by ur customer support about reconcern of my issue #emptybox #refund. Please reply revert a proper solution and take action against your seller &amp; delivery team as box was empty as i opened the amazon mi seal. <URL>",
+    "expected_intent": "damaged_defective_item",
+    "predicted_intent": "damaged_defective_item",
+    "reply_draft": "Thank you for reaching out. I'm sorry to hear about the issue with your delivery. I recommend using our official support channels for a more detailed response regarding your empty box concern. Your feedback is important, and we take these matters seriously. Please check the help section on our website for assistance.",
+    "evidence": [
+      {
+        "source_id": "AmazonHelp_67505_67504",
+        "historical_customer_issue": "@user I did report the latest delivery and it seems like it happens a lot as there is a feature for this to complain in place. I also did for the previous delivery and because the box was open then I returned the item.",
+        "historical_brand_reply": "@user Thank you for reporting these delivery issues. Concerning this present delivery, what were the options that were given to you? We want to assist you in getting your package. ^DJ"
+      }
+    ]
+  },
+  {
+    "id": "gold_120187",
+    "customer_message": "@user Tudo correto. Endere\u00e7o normal, onde resido e j\u00e1 recebi diversas entregas da Amazon, sem problemas. CEP correto no cadastro.",
+    "expected_intent": "order_status_delivery",
+    "predicted_intent": "order_status_delivery",
+    "reply_draft": "Entendemos que voc\u00ea est\u00e1 tendo problemas com a entrega. Para resolver isso, recomendamos que voc\u00ea entre em contato com nosso suporte oficial para obter assist\u00eancia espec\u00edfica sobre o status do seu pedido. Estamos aqui para ajudar!",
+    "evidence": [
+      {
+        "source_id": "AmazonHelp_124028_124026",
+        "historical_customer_issue": "@user gracias, esperar\u00e9 su llamada porque es Amazon Logistics quien me entrega.",
+        "historical_brand_reply": "@user Estamos para servirte, Ady. Nos mantienes al tanto de lo sucedido. ^LC"
+      }
+    ]
+  },
+  {
+    "id": "gold_114370",
+    "customer_message": "@user Are you doing a black friday sale?",
+    "expected_intent": "product_inquiry_availability",
+    "predicted_intent": "product_inquiry_availability",
+    "reply_draft": "Thank you for your inquiry! While I can't provide specific details about upcoming sales, I recommend checking our website closer to Black Friday for the latest updates on promotions and deals. If you have any other questions, feel free to ask!",
+    "evidence": [
+      {
+        "source_id": "AmazonHelp_109916_109917",
+        "historical_customer_issue": "@user @user Making money off it. This #BlackFriday reconsider if whether the offer on @user is really worth the risk of them hoarding your money and not providing the goods. #poorservice #poorcustomerservice #scammers (/2)",
+        "historical_brand_reply": "@user I apologize for the trouble with your recent order! We're more than happy to help if we can! When you spoke to us, what information or options were we able to provide. In addition, please see some tips here that may help: <URL> ^CS"
+      },
+      {
+        "source_id": "AmazonHelp_86100_86099",
+        "historical_customer_issue": "@user Yes for some but now I have missed out on some of the Black Friday deal as they can\u2019t be replaced :(",
+        "historical_brand_reply": "@user Hello Clare, I am sorry to hear that. Pease contact our customer service team here: <URL> We will assist you further. ^HS"
+      }
+    ]
+  },
+  {
+    "id": "gold_105018",
+    "customer_message": "@user if an item is damaged and I want to return it who pays the postage to return it. The buyer or seller",
+    "expected_intent": "returns_refunds",
+    "predicted_intent": "returns_refunds",
+    "reply_draft": "For information regarding who pays for return shipping on damaged items, please connect with us using the official support channel for further assistance. ^KA",
+    "evidence": [
+      {
+        "source_id": "AmazonHelp_17660_17659",
+        "historical_customer_issue": "@user Also concern how I get my shipping charges back once self return product?",
+        "historical_brand_reply": "@user Please connect with us using this link here: <URL> for further assistance. ^KA"
+      }
+    ]
+  },
+  {
+    "id": "gold_111924",
+    "customer_message": "[ESP] \u00a1Hola @user! Soy cliente prime y me acabo de dar de alta en vuestra plataforma Prime Video. \u00bfEl servicio va incluido en mi cuota anual prime? \u00bfMe va a sponer alg\u00fan coste adicional?",
+    "expected_intent": "subscription_digital",
+    "predicted_intent": "subscription_digital",
+    "reply_draft": "\u00a1Hola! Prime Video est\u00e1 incluido en tu membres\u00eda de Amazon Prime, as\u00ed que no tendr\u00e1s costos adicionales por acceder a este servicio. Si tienes m\u00e1s preguntas, te recomiendo contactar a Soporte al Cliente para obtener informaci\u00f3n m\u00e1s detallada.  \n",
+    "evidence": [
+      {
+        "source_id": "AmazonHelp_30025_30026",
+        "historical_customer_issue": "@user bom dia! Agora que o servi\u00e7o do prime v\u00eddeo pode ser pago em Reais, fica a d\u00favida: os outros canais extras do prime tamb\u00e9m?",
+        "historical_brand_reply": "@user Bom dia Vini, por favor contata a Suporte ao Cliente para que possam te informar sobre o pago: <URL> ^DA"
+      },
+      {
+        "source_id": "AmazonHelp_5297_5298",
+        "historical_customer_issue": "Que hueva tendr\u00e9 que ver\u00e9 vaselina por Amazon prime video. Obvio me pasan una lana por promocionar prime video @user",
+        "historical_brand_reply": "@user Hola Val Damon. Puedes hacer una prueba gratuita de Prime Video si nunca lo has usado. Accesa este enlace: <URL> ^JJ"
+      },
+      {
+        "source_id": "AmazonHelp_8514_8516",
+        "historical_customer_issue": "@user Exijo mi reembolso inmediato ya que yo en ning\u00fan momento solicit\u00e9 dicha membres\u00eda \"prime\", hubo alg\u00fan error. Soluci\u00f3n inmediata",
+        "historical_brand_reply": "@user Hola Mary. Para m\u00e1s detalles sobre como cancelar tu membres\u00eda de Amazon Prime, ingresa a: <URL> ^HC"
+      }
+    ]
+  },
+  {
+    "id": "gold_102923",
+    "customer_message": "@user ordered a @user momentum 2 iebt earphone from Amazon. Came in a horrible condition. The box was damaged, the box inside the hard case was damaged. Wtf? Want to return it right now! Don't want replacement. Ordering it directly from the Sennheiser site.",
+    "expected_intent": "damaged_defective_item",
+    "predicted_intent": "damaged_defective_item",
+    "reply_draft": "I understand your frustration with the condition of the earphones. To initiate a return, please visit the official Amazon website or app and follow the return process. If you need further assistance, I recommend reaching out to our secure support channels for help.",
+    "evidence": [
+      {
+        "source_id": "AmazonHelp_35167_35165",
+        "historical_customer_issue": "@user It was delivered on 15-Jul-2017,so no way of returning this.... full waste of money Bt plz deliver Sennheiser CX 180 at asap!!",
+        "historical_brand_reply": "@user We shall be doing our best to meet the estimated delivery date. ^CB"
+      }
+    ]
+  },
+  {
+    "id": "gold_96844",
+    "customer_message": "Hey @user I did use the link you sent but was asked to call Intelcom and no one picked up the phone. They decided to leave the package taped to my mailbox yesterday! So I\u2019m a happy camper! Thanks for checking in! <URL>",
+    "expected_intent": "order_status_delivery",
+    "predicted_intent": "order_status_delivery",
+    "reply_draft": "Thank you for the update! I'm glad to hear that your package was delivered. If you have any further questions or need assistance, feel free to reach out.  \n\n^WM",
+    "evidence": [
+      {
+        "source_id": "AmazonHelp_16423_16422",
+        "historical_customer_issue": "@user Intelcom Express. I couldn't contact them last night since I got home after their operating hours. Sent them an email this morning",
+        "historical_brand_reply": "@user Please let us know if you do not receive your order, or an update, today so we may contact the carrier on your behalf. ^WM"
+      }
+    ]
+  },
+  {
+    "id": "gold_115845",
+    "customer_message": "N\u00e3o \u00e9 sexta mas j\u00e1 estou aproveitando a #BlackFriday. Finalmente, dps de muito tempo, consegui comprar meu Kindle na @user. <URL>",
+    "expected_intent": "other_unknown",
+    "predicted_intent": "product_inquiry_availability",
+    "reply_draft": "Ol\u00e1! Que bom que voc\u00ea conseguiu aproveitar a Black Friday para comprar seu Kindle! Fique de olho nas nossas redes sociais e no site para mais promo\u00e7\u00f5es. Se precisar de mais informa\u00e7\u00f5es, estamos aqui para ajudar! \ud83d\ude0a",
+    "evidence": [
+      {
+        "source_id": "AmazonHelp_108169_108170",
+        "historical_customer_issue": "Pensando em me dar um Kindle Paperwhite de presente! Acabei de ver o twitt da @user que est\u00e1 no #blackfriday &lt;3",
+        "historical_brand_reply": "@user Ol\u00e1, Mitcheia! Conte para n\u00f3s, voc\u00ea vai aproveitar da promo\u00e7\u00e3o?. \ud83e\udd14\ud83d\ude03 ^NB"
+      },
+      {
+        "source_id": "AmazonHelp_115821_115823",
+        "historical_customer_issue": "Melhor promo\u00e7\u00e3o dessa Black Friday toda @user <URL>",
+        "historical_brand_reply": "@user Ol\u00e1, Roberto! Promo\u00e7\u00e3o legal demais, n\u00e3o \u00e9? Me diga, voc\u00ea conseguiu aproveitar as nossas ofertas? :D ^CR"
+      },
+      {
+        "source_id": "AmazonHelp_123438_123439",
+        "historical_customer_issue": "@user Oi amiga linda, vai ter mais promo\u00e7\u00e3o de blackfriday, ou j\u00e1 s\u00e3o as do site?",
+        "historical_brand_reply": "@user Oi amiga! Vamos anunciar promo\u00e7\u00f5es no site e tamb\u00e9n nas nossas redes sociais. Acessa nosso site com frequ\u00eancia para obter as \u00faltimas informa\u00e7\u00f5es de nossas promo\u00e7oes. ^JJ"
+      }
+    ]
+  },
+  {
+    "id": "gold_96683",
+    "customer_message": "@user @user Please stop cheating customers by delivering old products. Bought a new laptop this week whose warranty is valid only for 290 days instead of a year.. Order id <PHONE>-7360357.. NEED REFUND.. <URL>",
+    "expected_intent": "damaged_defective_item",
+    "predicted_intent": "returns_refunds",
+    "reply_draft": "I understand your concern regarding the warranty on your new laptop. To address this issue, please reach out to our support team through the official secure channel for assistance with your refund request. Thank you for your patience!",
+    "evidence": [
+      {
+        "source_id": "AmazonHelp_26963_26961",
+        "historical_customer_issue": "@user Not yet, have tried to contact the seller several times and no response. Not got access to a laptop to further the complaint at the moment",
+        "historical_brand_reply": "@user We want to help out! So when you have the ability to contact us, here's a link to reach out: <URL> ^MJ"
+      }
+    ]
+  },
+  {
+    "id": "gold_24996",
+    "customer_message": "@user There was no way I could communicate that I never subscribed for a prime membership on your dot com website.",
+    "expected_intent": "subscription_digital",
+    "predicted_intent": "subscription_digital",
+    "reply_draft": "I'm sorry to hear about the confusion regarding your Prime membership. Please reach out to our customer service through the official support channel for assistance with this issue. They will be able to help you further. ^SK",
+    "evidence": [
+      {
+        "source_id": "AmazonHelp_113796_113798",
+        "historical_customer_issue": "Apparently @user knows more about I want than myself. After cancelling my Prime membership some time ago, they just decided to renew it and charge me for it. Great job! (Not!)",
+        "historical_brand_reply": "@user This shouldn't happen! :( Please get in touch with our customer service via <URL> Our colleagues will have a look into this. ^SK"
+      },
+      {
+        "source_id": "AmazonHelp_31851_31852",
+        "historical_customer_issue": "Dear @user , 10.99 dollars deducted for Prime membership. Sorry, I never subscribed to it. Please return.",
+        "historical_brand_reply": "@user Sorry for the unexpected charge! If benefits haven't been used, you can cancel for a full refund: <URL> ^KJ"
+      },
+      {
+        "source_id": "AmazonHelp_1705_1706",
+        "historical_customer_issue": "@user I have tried. It\u2019s not allowing me to access my account to cancel my membership, I haven\u2019t even used prime in almost 3 months.",
+        "historical_brand_reply": "@user I'm sorry to hear you're not able to access your account. Please use this link instead to contact us: <URL> ^LH"
+      }
+    ]
+  },
+  {
+    "id": "gold_56900",
+    "customer_message": "@user Just had even more damaged replacement TV delivered. You overpackage unbreakable items and add no packaging to TVs. Muppets. now 31 min wait",
+    "expected_intent": "damaged_defective_item",
+    "predicted_intent": "damaged_defective_item",
+    "reply_draft": "I'm sorry to hear about the issues with your replacement TV. I understand how frustrating this must be. Please reach out to our support team through the official channels for assistance with your situation. They will be able to help you further.",
+    "evidence": [
+      {
+        "source_id": "AmazonHelp_107331_107330",
+        "historical_customer_issue": "@user Now a week late. Two missing TV\u2019s, still no replacement and you have offered us a \u00a35 voucher and month free #prime as #compensation utterly appalling #customerservice #shopping #disappointed",
+        "historical_brand_reply": "@user So sorry for the frustrations! We are here to help! I'd like a member of my team to look into this personally for you! Please provide us your information here: <URL> and someone will be in touch soon! ^AD"
+      },
+      {
+        "source_id": "AmazonHelp_117874_117873",
+        "historical_customer_issue": "@user So after another call and being told I would have my delivery guatenteed today I have now had to call up and be told that the tv isn\u2019t coming. Absolute waste!",
+        "historical_brand_reply": "@user I'm sorry to hear this! When you had called, did the agent provide any reason for why the TV is not being delivered today? ^TH"
+      }
+    ]
+  },
+  {
+    "id": "gold_99956",
+    "customer_message": "@user It is your own carrier. So if that is possible I will gladly put a stop using your own carrier to deliver my packages and deal with UPS, FedEx or USPS.",
+    "expected_intent": "order_status_delivery",
+    "predicted_intent": "order_status_delivery",
+    "reply_draft": "I understand your frustration with the delivery service. For assistance with your order and to explore your options, please reach out to us through our official support channel here: <URL>. We can provide the help you need. ^TM",
+    "evidence": [
+      {
+        "source_id": "AmazonHelp_18732_18731",
+        "historical_customer_issue": "@user The carrier is USPS.",
+        "historical_brand_reply": "@user Thanks for confirming, Aletta! Please contact us here: <URL> either by phone or chat so that we can review at the order level. Over social media, we don't have the access needed. We'll be ready to help as soon as you contact. ^TM"
+      },
+      {
+        "source_id": "AmazonHelp_80584_80582",
+        "historical_customer_issue": "@user I contacted you guys via the link above and the rep told me they contacted the carrier (UPS) and my packages would be delivered today. Unfortunately, here we are, 12 hours later.... still no packages.",
+        "historical_brand_reply": "@user I'm sorry your order has yet to arrive! What does the most recent tracking update from the carrier show here: <URL> ^BN"
+      }
+    ]
+  },
+  {
+    "id": "gold_109790",
+    "customer_message": "@user A promo\u00e7\u00e3o do Kindle vai at\u00e9 quando? :)",
+    "expected_intent": "product_inquiry_availability",
+    "predicted_intent": "product_inquiry_availability",
+    "reply_draft": "Ol\u00e1! Para saber at\u00e9 quando vai a promo\u00e7\u00e3o do Kindle, recomendo que voc\u00ea acesse o link das promo\u00e7\u00f5es dispon\u00edveis. Assim, voc\u00ea ter\u00e1 as informa\u00e7\u00f5es mais atualizadas. ^NB",
+    "evidence": [
+      {
+        "source_id": "AmazonHelp_124084_124085",
+        "historical_customer_issue": "@user Promo\u00e7\u00e3o de Kindle que \u00e9 bom n\u00e3o vai ter?",
+        "historical_brand_reply": "@user Ol\u00e1, Yin! Voc\u00ea pode verificar as promo\u00e7\u00f5es do Kindle, acessando o seguinte link: <URL> ^NB"
+      }
+    ]
+  },
+  {
+    "id": "gold_19136",
+    "customer_message": "@user Third class teturn service so please make sure return product pick up.",
+    "expected_intent": "returns_refunds",
+    "predicted_intent": "returns_refunds",
+    "reply_draft": "I understand your concern regarding the return service. For assistance with your return pickup, please reach out to us through our official support channel. We\u2019re here to help!",
+    "evidence": [
+      {
+        "source_id": "AmazonHelp_38119_38120",
+        "historical_customer_issue": "My product Return was cancelled without any information. @user @user why??",
+        "historical_brand_reply": "@user That is unusual, Dhrumil. Kindly reach out to us via: <URL> and we will have this checked. ^KS"
+      },
+      {
+        "source_id": "AmazonHelp_19204_19205",
+        "historical_customer_issue": "@user pl do...i am already fed up with the service...considering returning the order.",
+        "historical_brand_reply": "@user I can understand it would be worrisome. Please be assured we'll contact you at the earliest. ^SC"
+      }
+    ]
+  },
+  {
+    "id": "gold_26880",
+    "customer_message": "@user hi, I have a credit card charge for prime every month when I am not a subscriber. Can you help?",
+    "expected_intent": "account_access_security",
+    "predicted_intent": "subscription_digital",
+    "reply_draft": "Hi! It sounds like there may be an issue with your account regarding the Prime charges. Please connect with us through our official support channel for assistance in resolving this matter. Thank you!",
+    "evidence": [
+      {
+        "source_id": "AmazonHelp_99816_99818",
+        "historical_customer_issue": "@user Hi there. To my surprise, I see that you've charged me a Prime Membership on my Mastercard which I never agreed to buying. How can we resolve this issue. Thank you.",
+        "historical_brand_reply": "@user Hi, Stephanie! Please visit us here for information about canceling Amazon Prime: <URL> ^RB"
+      },
+      {
+        "source_id": "AmazonHelp_17914_17916",
+        "historical_customer_issue": "@user why am i charged $10.99 for prime membership every month when i have purchased it for INR 499?",
+        "historical_brand_reply": "@user Please connect with us here: <URL> and we'll assist you on how to proceed further. (2/2) ^KA"
+      },
+      {
+        "source_id": "AmazonHelp_113796_113798",
+        "historical_customer_issue": "Apparently @user knows more about I want than myself. After cancelling my Prime membership some time ago, they just decided to renew it and charge me for it. Great job! (Not!)",
+        "historical_brand_reply": "@user This shouldn't happen! :( Please get in touch with our customer service via <URL> Our colleagues will have a look into this. ^SK"
+      }
+    ]
+  },
+  {
+    "id": "gold_40421",
+    "customer_message": "@user Otherwise i cant return this damage product",
+    "expected_intent": "returns_refunds",
+    "predicted_intent": "damaged_defective_item",
+    "reply_draft": "We understand your concern regarding the return of a damaged product. Please connect with our support team through the official channel for assistance with your return. Thank you for your patience.",
+    "evidence": [
+      {
+        "source_id": "AmazonHelp_73458_73456",
+        "historical_customer_issue": "@user I just want to return this, pls raise my concern. Not able to do this from my end. Dont expect anything from my end. If this not done then i will make sure will not buy anymore from @user",
+        "historical_brand_reply": "@user We understand your concern regarding the return of your order. Kindly connect with our support team here: <URL> and we'll assist you accordingly. ^VH"
+      }
+    ]
+  },
+  {
+    "id": "gold_18131",
+    "customer_message": "@user @user 'Handed over directly to Customer' when I'd left this place at 6:00 pm &amp; never returned for the night. Trust @user to do the impossible",
+    "expected_intent": "order_status_delivery",
+    "predicted_intent": "order_status_delivery",
+    "reply_draft": "I understand your frustration regarding the delivery status. To get more information and assistance, please reach out to us through our official support channels here: <URL>.",
+    "evidence": [
+      {
+        "source_id": "AmazonHelp_125338_125339",
+        "historical_customer_issue": "@user Once again DID NOT RECEIVE TODAY",
+        "historical_brand_reply": "@user We're available to look into our options. When you can, please reach us via phone or chat here: <URL> ^SJ"
+      },
+      {
+        "source_id": "AmazonHelp_111730_111729",
+        "historical_customer_issue": "@user Was supposed to get an email from a customer service agent today before 9pm and nothing! No item, no money and seriously annoyed! Customer service is shocking!!",
+        "historical_brand_reply": "@user Please reach out to us here: <URL> . We'd like to take a closer look at this. ^LJ"
+      },
+      {
+        "source_id": "AmazonHelp_80775_80778",
+        "historical_customer_issue": "@user Whole day to get back to me ... Unexpected @user .",
+        "historical_brand_reply": "@user You must have received a correspondence to your registered email address, request you to check and reply to the same. You can also find all the emails sent by us here: <URL> ^AR"
+      }
+    ]
+  },
+  {
+    "id": "gold_125378",
+    "customer_message": "@user at\u00e9 quando vai essa promo\u00e7\u00e3o do Kindle?",
+    "expected_intent": "product_inquiry_availability",
+    "predicted_intent": "product_inquiry_availability",
+    "reply_draft": "Ol\u00e1! Para saber at\u00e9 quando vai a promo\u00e7\u00e3o do Kindle, recomendo que voc\u00ea acesse o link das promo\u00e7\u00f5es dispon\u00edveis. Assim, voc\u00ea poder\u00e1 verificar as informa\u00e7\u00f5es mais atualizadas. ^NB",
+    "evidence": [
+      {
+        "source_id": "AmazonHelp_124084_124085",
+        "historical_customer_issue": "@user Promo\u00e7\u00e3o de Kindle que \u00e9 bom n\u00e3o vai ter?",
+        "historical_brand_reply": "@user Ol\u00e1, Yin! Voc\u00ea pode verificar as promo\u00e7\u00f5es do Kindle, acessando o seguinte link: <URL> ^NB"
+      }
+    ]
+  },
+  {
+    "id": "gold_29512",
+    "customer_message": "This is very sad to say that being a happy cust. this time had worst experience on returns. Yet not able to return. @user @user",
+    "expected_intent": "returns_refunds",
+    "predicted_intent": "returns_refunds",
+    "reply_draft": "I'm sorry to hear about your experience with the return process. I recommend reaching out to our support team for assistance. You can connect with them here: <URL>. They will be able to help you with your return. ^VH",
+    "evidence": [
+      {
+        "source_id": "AmazonHelp_73458_73456",
+        "historical_customer_issue": "@user I just want to return this, pls raise my concern. Not able to do this from my end. Dont expect anything from my end. If this not done then i will make sure will not buy anymore from @user",
+        "historical_brand_reply": "@user We understand your concern regarding the return of your order. Kindly connect with our support team here: <URL> and we'll assist you accordingly. ^VH"
+      },
+      {
+        "source_id": "AmazonHelp_27873_27875",
+        "historical_customer_issue": "@user I am requesting to return this product since last 15 days but no response at all. WORST return policy I have ever seen.....",
+        "historical_brand_reply": "@user I'm sorry about the delay. Kindly share your details here: <URL> and I'll look into this. ^SG"
+      }
+    ]
+  },
+  {
+    "id": "gold_121120",
+    "customer_message": "@user hey ive been billed on my creditcard for amazon prime me myself never signed up for it.. can you help me?",
+    "expected_intent": "account_access_security",
+    "predicted_intent": "subscription_digital",
+    "reply_draft": "I'm sorry to hear about the unexpected charge. Please check your account to see if a Prime membership is listed. If you find it and wish to cancel, you can do so through your account settings. For further assistance, please reach out to our official support channel.",
+    "evidence": [
+      {
+        "source_id": "AmazonHelp_114346_114348",
+        "historical_customer_issue": "@user Why am I being charged for Amazon prime when I haven't signed up for anything or used Amazon in months?",
+        "historical_brand_reply": "@user So sorry for any trouble! We're here to help in any way we can. Are you able to see the membership in your account here: <URL> ^BL"
+      },
+      {
+        "source_id": "AmazonHelp_33176_33177",
+        "historical_customer_issue": "@user I do not want to be an amazon prime member and how did u charge me 11.00 for my membership that I don't remember signing up",
+        "historical_brand_reply": "@user I'm sorry! If no benefits have been used, canceling issues a full refund. You can do so here: <URL> ^JZ"
+      },
+      {
+        "source_id": "AmazonHelp_99816_99818",
+        "historical_customer_issue": "@user Hi there. To my surprise, I see that you've charged me a Prime Membership on my Mastercard which I never agreed to buying. How can we resolve this issue. Thank you.",
+        "historical_brand_reply": "@user Hi, Stephanie! Please visit us here for information about canceling Amazon Prime: <URL> ^RB"
+      }
+    ]
+  },
+  {
+    "id": "gold_95332",
+    "customer_message": "Thanks @user for the damaged box but I\u2019m glad it still works <URL>",
+    "expected_intent": "damaged_defective_item",
+    "predicted_intent": "damaged_defective_item",
+    "reply_draft": "I'm glad to hear that the item still works despite the damaged box! If you have any concerns about the product itself or need assistance, please reach out through our official support channels. We're here to help!",
+    "evidence": [
+      {
+        "source_id": "AmazonHelp_14290_14291",
+        "historical_customer_issue": "What the hell @user?! This boxed is beyond damaged. I wanted a new one! <URL>",
+        "historical_brand_reply": "@user I'm sorry! Was it shipped by Amazon or a third-party seller as seen here: <URL> ^SE"
+      },
+      {
+        "source_id": "AmazonHelp_98610_98611",
+        "historical_customer_issue": "My @user hue+ just arrived from @user. The box is damaged as you can see, but hopefully all is well. <URL>",
+        "historical_brand_reply": "@user I'm so sorry to see the box was damaged for this item, Justin! That's definitely not the service we pride ourselves in providing. Have you been able to check if the item itself is damaged? ^TH"
+      },
+      {
+        "source_id": "AmazonHelp_80715_80716",
+        "historical_customer_issue": "Thanks @user for the big box... And the stuff as well but it seems not much <URL>",
+        "historical_brand_reply": "@user That's indeed pretty much packaging in this box. Please feel free to provide your feedback directly via <URL> in order to let us know how to improve our services. ^KM"
+      }
+    ]
+  },
+  {
+    "id": "gold_86200",
+    "customer_message": "Yo @user IntelCom as a courier = #FAIL Delivery was very late so missed. No answer + site tracking broken. We want our shipment!",
+    "expected_intent": "order_status_delivery",
+    "predicted_intent": "order_status_delivery",
+    "reply_draft": "Hi there! I understand your frustration with the delivery delay. Unfortunately, I can't access specific order details here. Please check your tracking information on the official site for updates. If you need further assistance, I recommend reaching out through our secure support channels. Thank you!",
+    "evidence": [
+      {
+        "source_id": "AmazonHelp_65908_65909",
+        "historical_customer_issue": "@user I have a delivery that was supposed to come today but still hasn\u2019t arrived can you help please? Tracking ID Q<PHONE>",
+        "historical_brand_reply": "@user Hey there! With Twitter, we're unable to access account or order information but we're here to help! What does your tracking information currently display here: <URL> Please, let us know. ^JE"
+      }
+    ]
+  },
+  {
+    "id": "gold_109788",
+    "customer_message": "@user N\u00e3o vai ter promo\u00e7\u00e3o de Kindle? \ud83d\ude22",
+    "expected_intent": "product_inquiry_availability",
+    "predicted_intent": "product_inquiry_availability",
+    "reply_draft": "Ol\u00e1! Voc\u00ea pode verificar as promo\u00e7\u00f5es do Kindle acessando o seguinte link: <URL>. Espero que encontre uma boa oferta!",
+    "evidence": [
+      {
+        "source_id": "AmazonHelp_124084_124085",
+        "historical_customer_issue": "@user Promo\u00e7\u00e3o de Kindle que \u00e9 bom n\u00e3o vai ter?",
+        "historical_brand_reply": "@user Ol\u00e1, Yin! Voc\u00ea pode verificar as promo\u00e7\u00f5es do Kindle, acessando o seguinte link: <URL> ^NB"
+      }
+    ]
+  },
+  {
+    "id": "gold_18702",
+    "customer_message": "@user It says wrong product has sent .. refund cannot be given ... u kindly ask ur courier guy n confirm me what was given to him ..",
+    "expected_intent": "returns_refunds",
+    "predicted_intent": "returns_refunds",
+    "reply_draft": "I'm sorry to hear about the issue with the wrong product. Please reach out to our support team through the official channel for assistance with this matter. They will be able to help you further. Thank you for your understanding.",
+    "evidence": [
+      {
+        "source_id": "AmazonHelp_73642_73640",
+        "historical_customer_issue": "@user i sold my product on ur site..the product was taken nd from dat tym neither the product is returned nor my money..take some serious actioc as soon as possible",
+        "historical_brand_reply": "@user Apologies for the hassle, Shishirkant. Please contact our seller support team here: <URL> so we can take a closer look at this and assist you. ^SF"
+      },
+      {
+        "source_id": "AmazonHelp_27351_27353",
+        "historical_customer_issue": "I have ordered 2 things from @user in the past month and haven't received either items and now Amazon is NOT tryna give me a refund \ud83d\udde3\ud83d\udde3",
+        "historical_brand_reply": "@user I'm so sorry to hear this! When you contacted us, what information or options were given for these orders? ^TH"
+      },
+      {
+        "source_id": "AmazonHelp_123447_123449",
+        "historical_customer_issue": "@user I have not got my refunded money since I have replaced my order since 5 - 6 days please check",
+        "historical_brand_reply": "@user Sorry for the inconvenience, Shreyash. Please report this to our support team here: <URL> and we'll look into this. ^MK"
+      }
+    ]
+  },
+  {
+    "id": "gold_22219",
+    "customer_message": "@user @user @user #my Prime membership expired &amp; I got a notification AFTER that. Now I've had to renew at higher cost. (1)",
+    "expected_intent": "subscription_digital",
+    "predicted_intent": "subscription_digital",
+    "reply_draft": "I'm sorry to hear about your experience with your Prime membership. For assistance with your account and any issues related to your membership, please reach out to our customer service through the official support channel. They will be able to help you further. ^SK",
+    "evidence": [
+      {
+        "source_id": "AmazonHelp_113796_113798",
+        "historical_customer_issue": "Apparently @user knows more about I want than myself. After cancelling my Prime membership some time ago, they just decided to renew it and charge me for it. Great job! (Not!)",
+        "historical_brand_reply": "@user This shouldn't happen! :( Please get in touch with our customer service via <URL> Our colleagues will have a look into this. ^SK"
+      },
+      {
+        "source_id": "AmazonHelp_59525_59526",
+        "historical_customer_issue": "@user is it possible to renew and pay for Prime membership early, a few months before it needs to be renewed? how do I do that?",
+        "historical_brand_reply": "@user This is currently not an option we provide for our prime memberships. You can see our options here: <URL> ^HM"
+      },
+      {
+        "source_id": "AmazonHelp_89184_89186",
+        "historical_customer_issue": "@user @user tell me how i was told my prime membership was cancelled on Nov17 &amp; i would recieve my refund waited until yesterday to call back just for them to tell me my prime was never cancelled. I just want my money back \ud83d\ude12",
+        "historical_brand_reply": "@user I'm sorry to hear of this. Have you received e-mail confirmation of your membership cancellation now? ^KI"
+      }
+    ]
+  },
+  {
+    "id": "gold_71957",
+    "customer_message": "@user Just got an email that it was lost or damaged",
+    "expected_intent": "order_status_delivery",
+    "predicted_intent": "damaged_defective_item",
+    "reply_draft": "I'm sorry to hear that you've received an email about your item being lost or damaged. Please be assured that our team is looking into this matter. We appreciate your patience as they work to provide you with an update soon.",
+    "evidence": [
+      {
+        "source_id": "AmazonHelp_11578_11580",
+        "historical_customer_issue": "@user Still not got any mail please solve my problem right now.",
+        "historical_brand_reply": "@user I'm afraid, we'll not be able to take any action on your account once it is put on hold. Request you to wait for the email. ^HD"
+      },
+      {
+        "source_id": "AmazonHelp_33180_33179",
+        "historical_customer_issue": "@user No email received...",
+        "historical_brand_reply": "@user I get you being upset, Ramesh. As our team is working, they'll ensure to get back to you with an update soon.Request you to wait.^NK"
+      },
+      {
+        "source_id": "AmazonHelp_80580_80579",
+        "historical_customer_issue": "@user Still nothing",
+        "historical_brand_reply": "@user Hi, we'll be in touch with an update as soon as possible. Apologies for the wait. ^TS"
+      }
+    ]
+  },
+  {
+    "id": "gold_89166",
+    "customer_message": "s\u00f3 queria receber uma mensagem de amor do @ pro dia ficar bonito o @ \u00e9 o @user, a mensagem \u00e9 \"seu pedido est\u00e1 a caminho\"",
+    "expected_intent": "order_status_delivery",
+    "predicted_intent": "order_status_delivery",
+    "reply_draft": "Ol\u00e1! Que lindo seu pedido! Embora eu n\u00e3o possa enviar mensagens diretamente, posso te lembrar que seu pedido est\u00e1 a caminho. Espero que seu dia fique ainda mais bonito! \u2764\ufe0f",
+    "evidence": [
+      {
+        "source_id": "AmazonHelp_35951_35953",
+        "historical_customer_issue": "Quero declarar meu amor pela @user. Melhor servi\u00e7o! Entregam meus livros quase que de um dia para o outro. \u2764\ufe0f",
+        "historical_brand_reply": "@user Julianaaa, assim voc\u00ea abala nossos cora\u00e7\u00f5es com tanto amor! \u2764 ^DA <URL>"
+      },
+      {
+        "source_id": "AmazonHelp_115826_115825",
+        "historical_customer_issue": "@user Ter\u00e7a agora. S\u00f3 estranhei q n achei a op\u00e7\u00e3o boleto na hora da compra, tive q pedir pra um conhecido q tem cart\u00e3o comprar pra mim",
+        "historical_brand_reply": "@user Roberto, acontece que no momento a op\u00e7\u00e3o de pagamento com boleto n\u00e3o est\u00e1 dispon\u00edvel. Voc\u00ea pode verificar essas informa\u00e7\u00f5es acessando o seguinte link: <URL> ^NB"
+      }
+    ]
+  },
+  {
+    "id": "gold_65869",
+    "customer_message": "@user @user @user I contacted your customer service center and even selected return option. But service boy refused to take back product this is fruad .I want to share such fruad info with people to aware of your such fruad work",
+    "expected_intent": "returns_refunds",
+    "predicted_intent": "returns_refunds",
+    "reply_draft": "I understand your frustration regarding the return process. This situation is not typical. Please reach out to us through our official support channel for assistance with your return. Thank you for your patience.",
+    "evidence": [
+      {
+        "source_id": "AmazonHelp_38119_38120",
+        "historical_customer_issue": "My product Return was cancelled without any information. @user @user why??",
+        "historical_brand_reply": "@user That is unusual, Dhrumil. Kindly reach out to us via: <URL> and we will have this checked. ^KS"
+      }
+    ]
+  },
+  {
+    "id": "gold_86122",
+    "customer_message": "@user Yes but the issue is that the \"attempt\" today. Would there be no way for them to try again today. i can't pick up a package if they don't ring the bell to let me know they are here to deliver it.",
+    "expected_intent": "order_status_delivery",
+    "predicted_intent": "order_status_delivery",
+    "reply_draft": "I understand your frustration regarding the delivery attempt. It's important to check with the courier for any updates on re-attempts. If you need further assistance, please reach out to us through our official support channels for more personalized help.",
+    "evidence": [
+      {
+        "source_id": "AmazonHelp_78714_78716",
+        "historical_customer_issue": "This week on @user: \u201cYour package is still on the way, but it may arrive later than expected.\u201d",
+        "historical_brand_reply": "@user Hi David, sorry to hear there's been a delay. Have you been provided with a revised delivery date? ^TS"
+      },
+      {
+        "source_id": "AmazonHelp_16421_16418",
+        "historical_customer_issue": "@user And there was no indication that they had re-attempted delivery",
+        "historical_brand_reply": "@user Who is the courier shown on the tracking info? Have you contacted the courier? ^LJ"
+      },
+      {
+        "source_id": "AmazonHelp_95415_95416",
+        "historical_customer_issue": "@user I need help. I still don\u2019t have my package and UPS is not helping. They claim to have attempted delivery even though I\u2019ve been home waiting for this package. This happened both yesterday and today. I don\u2019t know what to do next. I\u2019m beyond frustrated at this point",
+        "historical_brand_reply": "@user Thanks for the update, Jo! Can you please reach out to us here via phone so that we can work with you directly to get this situation resolved? <URL> ^GS"
+      }
+    ]
+  },
+  {
+    "id": "gold_101743",
+    "customer_message": "@user I bought an item last week and now it\u2019s selling half price. I want to return and reorder or do you just want to refund me the difference?!",
+    "expected_intent": "product_inquiry_availability",
+    "predicted_intent": "returns_refunds",
+    "reply_draft": "I understand your concern about the price change. Unfortunately, we can't process refunds or exchanges through this channel. Please visit our official support page for assistance with your request: <URL>.",
+    "evidence": [
+      {
+        "source_id": "AmazonHelp_45532_45533",
+        "historical_customer_issue": "@user Thanks! I need to use the item tomorrow so I can't really return the rest of it. Is there any way to get a partial refund?",
+        "historical_brand_reply": "@user We'd like to take a look into some available options with you. Please reach out to us here: <URL> ^TH"
+      },
+      {
+        "source_id": "AmazonHelp_124776_124774",
+        "historical_customer_issue": "@user HEY! I dont want a refund. I want my ordered items. I have planned to use it this weekend and now i cant. Please send my ordered items. I repeat. I dont want a refund",
+        "historical_brand_reply": "@user We're unable to view accounts or make changes via Twitter but not all are eligible for a replacement. Available options will show via the link ^SJ provided. ^JO"
+      }
+    ]
+  }
+]
