@@ -64,6 +64,8 @@ cp .env.example .env
 pytest -v
 ```
 
+Tests, baseline code, and escalation checks run without an API key. The saved live benchmark completed in 83.2 seconds with the local FAISS index already built. Rebuilding that index requires the Kaggle `twcs.csv` file and a one-time Sentence Transformer download. Raw tweets, the vector index, and `.env` are not committed. Re-running `scripts/evaluate_agent.py` calls the API again and can change judge wording, so the committed `reports/agent_results.json` is the reference result.
+
 ## Checkpoint Status
 
 - [x] **Checkpoint 0**: Workspace and Git preflight
@@ -75,7 +77,7 @@ pytest -v
 - [x] **Checkpoint 6**: AI agent pipeline with structured outputs and deterministic escalation
 - [x] **Checkpoint 7**: Evaluation harness and LLM judge agreement (AI reviewer; no independent human validation)
 - [x] **Checkpoint 8**: Failure analysis, headline number critique, and decision log
-- [ ] **Checkpoint 9**: Final reproducibility verification and release
+- [x] **Checkpoint 9**: Final reproducibility verification and release
 
 ## Baseline Performance Results
 
