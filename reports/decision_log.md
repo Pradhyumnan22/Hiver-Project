@@ -217,4 +217,13 @@ This log records genuine, non-obvious engineering decisions, rationale, trade-of
 - **Alternatives Rejected**: Keyword-based reply quality, BLEU/ROUGE against a
   single historical reply, and invented agreement figures.
 
+---
+
+### Decision 14: Do Not Use Classification Accuracy as the Safety Headline
+- **Date**: 2026-10-15
+- **Context**: The agent reached 76.00% intent accuracy, higher than both baselines.
+- **Decision**: Report escalation disagreements and unsupported-claim failures alongside accuracy. The benchmark report explicitly explains why 76.00% does not measure safe automation.
+- **Rationale**: Sixty expected escalations were auto-handled. An accurate intent can still produce an unsafe action.
+- **Alternative Rejected**: Leading the report with classification accuracy alone.
+
 

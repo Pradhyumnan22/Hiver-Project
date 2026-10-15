@@ -74,7 +74,7 @@ pytest -v
 - [x] **Checkpoint 5**: Historical retrieval with FAISS and relevance thresholding
 - [x] **Checkpoint 6**: AI agent pipeline with structured outputs and deterministic escalation
 - [x] **Checkpoint 7**: Evaluation harness and LLM judge agreement (AI reviewer; no independent human validation)
-- [ ] **Checkpoint 8**: Failure analysis, headline number critique, and decision log
+- [x] **Checkpoint 8**: Failure analysis, headline number critique, and decision log
 - [ ] **Checkpoint 9**: Final reproducibility verification and release
 
 ## Baseline Performance Results
@@ -101,7 +101,8 @@ is an important limitation, not hidden training supervision.
 - The TF-IDF reply retriever has **0.3361** mean top-1 cosine similarity and
   only **31.0%** coverage at the documented 0.35 threshold, demonstrating why
   low-evidence cases must not automatically reuse historical replies.
-- Detailed metrics saved to [`reports/results.json`](reports/results.json).
+- Detailed metrics: [`reports/results.json`](reports/results.json) and [`reports/agent_results.json`](reports/agent_results.json).
+- Failure analysis and headline-number critique: [`reports/benchmark_report.md`](reports/benchmark_report.md).
 
 
 ## Intent Taxonomy & Golden Evaluation Benchmark
